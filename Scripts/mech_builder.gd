@@ -22,6 +22,7 @@ func _ready():
 func _process(delta):
 	pass
 
+
 func create_slot():
 	var new_slot = slot_scene.instantiate()
 	new_slot.slot_ID = grid_array.size()
