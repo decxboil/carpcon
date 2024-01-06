@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FrameStats" load_steps=2 format=3 uid="uid://b1ag54qveqxy7"]
+
+[ext_resource type="Script" path="res://Resources/Mech Parts/frameStats.gd" id="1_67jks"]
+
+[resource]
+script = ExtResource("1_67jks")
+name = "Rhombus"
+close = 5
+far = 5
+evade = 11
+speed = 3
+sensors = 3
+power = 2
+ap = 2
+core_integrity = 3
+weight_cap = 12
+repair_dice = 1
+unlocked_hardpoints = 23

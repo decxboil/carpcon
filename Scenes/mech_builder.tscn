@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://omqiq6i12mv3"]
+
+[ext_resource type="Script" path="res://Scripts/mech_builder.gd" id="1_e2epo"]
+[ext_resource type="Texture2D" uid="uid://wtg50vphff2i" path="res://icon.svg" id="3_1flf0"]
+[ext_resource type="Script" path="res://Scripts/saveButton.gd" id="4_twpa3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6m6hc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwtow"]
+resource_local_to_scene = true
+size = Vector2(79.5, 38)
+
+[node name="MechLayout" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -607.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e2epo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(545, 648)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0823529, 0.109804, 0.294118, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button_Spawn" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+text = "Spawn Item"
+
+[node name="BodyContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_6m6hc")
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 559.0
+offset_top = 8.0
+offset_right = 641.0
+offset_bottom = 48.0
+script = ExtResource("4_twpa3")
+
+[node name="TextureRect" type="TextureRect" parent="SaveButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1flf0")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SaveButton"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 16.0
+offset_right = 79.0
+offset_bottom = 42.0
+text = "Save
+"
+
+[node name="Area2D" type="Area2D" parent="SaveButton"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SaveButton/Area2D"]
+position = Vector2(41, 20)
+shape = SubResource("RectangleShape2D_dwtow")
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
+[connection signal="button_down" from="SaveButton" to="SaveButton" method="_on_button_down"]
+[connection signal="area_entered" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_area_exited"]
