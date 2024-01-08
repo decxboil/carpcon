@@ -13,7 +13,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if selected:
-		global_position = lerp(global_position, get_global_mouse_position(), 60 * delta)
+		global_position = lerp(global_position, get_global_mouse_position() - IconRect_path.size/2, 60 * delta)
 
 func load_item(a_itemID : int):
 	var icon_path = "res://Assets/" + DataHandler.item_data[str(a_itemID)]["Name"] + ".png"
@@ -23,3 +23,9 @@ func load_item(a_itemID : int):
 		for i in grid:
 			converter_array.push_back(int(i))
 		item_grids.push_back(converter_array)
+
+func snap_to(destination: Vector2):
+	var tween = get_tree().create_tween()
+	
+	tween.tween_property(self, "global_position", destination + IconRect_path.size/4, 0.01).set_trans(Tween.TRANS_SINE)
+	selected = false

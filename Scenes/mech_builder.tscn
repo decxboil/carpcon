@@ -30,38 +30,33 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0823529, 0.109804, 0.294118, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+[node name="BodyContainer" type="GridContainer" parent="ColorRect"]
+material = SubResource("ShaderMaterial_6m6hc")
+custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
+offset_left = 182.0
+offset_top = 276.0
+offset_right = 362.0
+offset_bottom = 456.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
 
-[node name="Header" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="ColorRect"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+offset_right = 545.0
+offset_bottom = 80.0
 
-[node name="Button_Spawn" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/Header"]
+[node name="Button_Spawn" type="Button" parent="ColorRect/Header"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
 text = "Spawn Item"
-
-[node name="BodyContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_6m6hc")
-custom_minimum_size = Vector2(180, 180)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
-columns = 6
 
 [node name="SaveButton" type="Button" parent="."]
 layout_mode = 2
@@ -96,7 +91,7 @@ text = "Save
 position = Vector2(41, 20)
 shape = SubResource("RectangleShape2D_dwtow")
 
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
+[connection signal="pressed" from="ColorRect/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
 [connection signal="button_down" from="SaveButton" to="SaveButton" method="_on_button_down"]
 [connection signal="area_entered" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_area_exited"]

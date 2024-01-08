@@ -8,6 +8,7 @@ signal slot_exited(slot)
 
 var slot_ID
 var is_hovering := false
+var locked := true
 enum States {DEFAULT, TAKEN, FREE, LOCKED}
 var state := States.DEFAULT
 var equipment_installed = null
@@ -16,17 +17,18 @@ func set_color(a_state = States.DEFAULT):
 	match a_state:
 		States.DEFAULT:
 			filter.color = Color(Color.WHITE, 0.0)
-			padlock.visible = false
 		States.TAKEN:
 			filter.color = Color(Color.RED, 0.3)
 		States.FREE:
 			filter.color = Color(Color.GREEN, 0.3)
-		States.LOCKED:
-			padlock.visible = true
 
 func lock():
-	state = States.LOCKED
-	self.set_color(state)
+	locked = true
+	padlock.visible = true
+
+func unlock():
+	locked = false
+	padlock.visible = false
 
 func _process(delta):
 	if state == States.LOCKED:
