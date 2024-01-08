@@ -1,9 +1,14 @@
 extends Control
 
 @onready var slot_scene = preload("res://Scenes/grid_slot.tscn")
-@onready var body_container = $ColorRect/BodyContainer
 @onready var item_scene = preload("res://Scenes/item.tscn")
-@onready var column_count = body_container.columns
+
+@onready var head_container = $ColorRect/HeadContainer
+@onready var body_container = $ColorRect/BodyContainer
+@onready var l_arm_container = $ColorRect/LeftArmContainer
+@onready var r_arm_container = $ColorRect/RightArmContainer
+@onready var legs_container = $ColorRect/LegsContainer
+@onready var containers = [body_container, l_arm_container, r_arm_container, head_container, legs_container]
 
 var grid_array := []
 var item_held = null
@@ -13,30 +18,35 @@ var icon_anchor : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(36):
-		create_slot()
+	for container in containers:
+		for i in container.capacity:
+			create_slot(container)
 	
-	for i in range(36):
-		if i > 20:
-			grid_array[i].unlock()
+	for i in grid_array.size():
+		pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if item_held:
-		if body_container.get_global_rect().has_point(get_global_mouse_position()):
-			if Input.is_action_just_pressed("mouse_leftclick"):
-				place_item()
+		if Input.is_action_just_pressed("mouse_leftclick"):
+			for container in containers:
+				if container.get_global_rect().has_point(get_global_mouse_position()):
+					place_item()
+		elif Input.is_action_just_pressed("mouse_rightclick"):
+			drop_item()
 	else:
-		if body_container.get_global_rect().has_point(get_global_mouse_position()):
-			if Input.is_action_just_pressed("mouse_leftclick"):
-				pickup_item()
+		if Input.is_action_just_pressed("mouse_leftclick"):
+			for container in containers:
+				if container.get_global_rect().has_point(get_global_mouse_position()):
+					pickup_item()
 	pass
 
-func create_slot():
+func create_slot(container):
 	var new_slot = slot_scene.instantiate()
 	new_slot.slot_ID = grid_array.size()
-	body_container.add_child(new_slot)
+	container.add_child(new_slot)
 	grid_array.push_back(new_slot)
+	new_slot.unlock()
 	new_slot.slot_entered.connect(_on_slot_mouse_entered)
 	new_slot.slot_exited.connect(_on_slot_mouse_exited)
 
@@ -60,6 +70,7 @@ func _on_button_spawn_pressed():
 	item_held = new_item
 
 func check_slot_availability(a_Slot):
+	var column_count = a_Slot.get_parent().columns
 	for grid in item_held.item_grids:
 		var grid_to_check = a_Slot.slot_ID + grid[0] + grid[1] * column_count
 		var line_switch_check = a_Slot.slot_ID % column_count + grid[0]
@@ -72,15 +83,21 @@ func check_slot_availability(a_Slot):
 		if grid_array[grid_to_check].state == grid_array[grid_to_check].States.TAKEN or grid_array[grid_to_check].locked:
 			can_place = false
 			return
+		if grid_array[grid_to_check].get_parent() != current_slot.get_parent():
+			can_place = false
+			return
 		can_place = true
 
 func set_grids(a_Slot):
+	var column_count = a_Slot.get_parent().columns
 	for grid in item_held.item_grids:
 		var grid_to_check = a_Slot.slot_ID + grid[0] + grid[1] * column_count
 		var line_switch_check = a_Slot.slot_ID % column_count + grid[0]
 		if line_switch_check < 0 or line_switch_check >= column_count:
 			continue
 		if grid_to_check < 0 or grid_to_check >= grid_array.size():
+			continue
+		if grid_array[grid_to_check].get_parent() != current_slot.get_parent():
 			continue
 		
 		if can_place:
@@ -99,7 +116,15 @@ func place_item():
 	if not can_place or not current_slot:
 		return
 	
+	var column_count = current_slot.get_parent().columns
 	var calculated_grid_id = current_slot.slot_ID + icon_anchor.x * column_count + icon_anchor.y
+	if calculated_grid_id >= grid_array.size():
+		return
+	
+	item_held.get_parent().remove_child(item_held)
+	current_slot.get_parent().add_child(item_held)
+	item_held.global_position = get_global_mouse_position()
+	
 	item_held.snap_to(grid_array[calculated_grid_id].global_position)
 	
 	item_held.grid_anchor = current_slot
@@ -115,13 +140,18 @@ func pickup_item():
 	if not current_slot or not current_slot.equipment_installed:
 		return
 	
+	var column_count = current_slot.get_parent().columns
 	item_held = current_slot.equipment_installed
 	item_held.selected = true
 	
 	for grid in item_held.item_grids:
-		var grid_to_check = item_held.slot_ID + grid[0] + grid[1] * column_count
+		var grid_to_check = item_held.grid_anchor.slot_ID + grid[0] + grid[1] * column_count
 		grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE
 		grid_array[grid_to_check].equipment_installed = null
 	
 	check_slot_availability(current_slot)
 	clear_grid.call_deferred(current_slot)
+
+func drop_item():
+	item_held.queue_free()
+	item_held = null
