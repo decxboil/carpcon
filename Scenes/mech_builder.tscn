@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/saveButton.gd" id="4_twpa3"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/RightArmContainer.gd" id="5_ikcqh"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/LegsContainer.gd" id="6_r7v1r"]
-[ext_resource type="Script" path="res://Scenes/stats_list.gd" id="9_xqjlf"]
+[ext_resource type="Script" path="res://Scripts/stats_list.gd" id="9_34ety"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6m6hc"]
 
@@ -189,7 +189,7 @@ color = Color(0.215686, 0.215686, 0.215686, 1)
 layout_mode = 2
 offset_right = 1.0
 offset_bottom = 23.0
-script = ExtResource("9_xqjlf")
+script = ExtResource("9_34ety")
 
 [node name="Label" type="Label" parent="Stats/StatsList"]
 layout_mode = 2
