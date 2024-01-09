@@ -8,4 +8,5 @@ script = ExtResource("1_fcrgp")
 [node name="Icon" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-expand_mode = 1
+scale = Vector2(1.4, 1.4)
+stretch_mode = 4

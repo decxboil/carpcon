@@ -6,6 +6,7 @@ var item_ID : int
 var item_grids := []
 var selected = false
 var grid_anchor = null
+var part_section = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +17,8 @@ func _process(delta):
 		global_position = lerp(global_position, get_global_mouse_position() - IconRect_path.size/2, 60 * delta)
 
 func load_item(a_itemID : int):
-	var icon_path = "res://Assets/" + DataHandler.item_data[str(a_itemID)]["Name"] + ".png"
+	part_section = DataHandler.item_data[str(a_itemID)]["section"]
+	var icon_path = "res://Assets/Item Sprites/" + part_section + " Parts/" + DataHandler.item_data[str(a_itemID)]["name"] + ".png"
 	IconRect_path.texture = load(icon_path)
 	for grid in DataHandler.item_grid_data[str(a_itemID)]:
 		var converter_array := []
@@ -27,5 +29,6 @@ func load_item(a_itemID : int):
 func snap_to(destination: Vector2):
 	var tween = get_tree().create_tween()
 	
-	tween.tween_property(self, "global_position", destination + IconRect_path.size/4, 0.01).set_trans(Tween.TRANS_SINE)
+	var snap_adjustment = Vector2(2,0)
+	tween.tween_property(self, "global_position", destination + snap_adjustment, 0.01).set_trans(Tween.TRANS_SINE)
 	selected = false

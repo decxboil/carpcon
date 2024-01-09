@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drv1rin6wk80w"
-path="res://.godot/imported/Item 1.png-d507d13b7123fde876b9035e164d40db.ctex"
+uid="uid://dutl3hi8y7mv0"
+path="res://.godot/imported/Suspension I - W0.png-4ae1edeb0e99e5885e427482b293df45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item 1.png"
-dest_files=["res://.godot/imported/Item 1.png-d507d13b7123fde876b9035e164d40db.ctex"]
+source_file="res://Assets/Item Sprites/Leg Parts/Suspension I - W0.png"
+dest_files=["res://.godot/imported/Suspension I - W0.png-4ae1edeb0e99e5885e427482b293df45.ctex"]
 
 [params]
 

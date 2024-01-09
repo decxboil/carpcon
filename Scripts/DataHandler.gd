@@ -16,15 +16,13 @@ func load_data(a_path):
 	var file = FileAccess.open(a_path, FileAccess.READ)
 	item_data = JSON.parse_string(file.get_as_text())
 	file.close()
-	print(item_data)
 
 func set_grid_data():
 	for item in item_data.keys():
 		var temp_grid_array := []
-		for point in item_data[item]["Grid"].split("/"):
+		for point in item_data[item]["grid"].split("/"):
 			temp_grid_array.push_back(point.split(","))
 		item_grid_data[item] = temp_grid_array
-	print(item_grid_data)
 
 func _process(delta):
 	pass

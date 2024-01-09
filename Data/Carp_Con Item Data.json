@@ -1,22 +1,30 @@
 {
 	"1": {
-		"Name": "Item 1",
-		"Value": 10,
-		"Grid": "0,0/0,1/-1,0"
+		"name": "Vulcan Cannon",
+		"weight": 2,
+		"type": "Weapon",
+		"section": "Head",
+		"grid": "0,0/0,1"
 	},
 	"2": {
-		"Name": "Item 2",
-		"Value": 20,
-		"Grid": "0,0/0,1"
+		"name": "Shark Teeth",
+		"weight": 3,
+		"type": "Weapon",
+		"section": "Head",
+		"grid": "0,0/0,1/1,1/2,1/2,0"
 	},
 	"3": {
-		"Name": "Item 3",
-		"Value": 30,
-		"Grid": "0,0/-1,0"
+		"name": "AI Core",
+		"weight": 2,
+		"type": "Active",
+		"section": "Head",
+		"grid": "0,0/0,1"
 	},
 	"4": {
-		"Name": "Item 4",
-		"Value": 40,
-		"Grid": "0,0"
+		"name": "Armor 2x1",
+		"weight": 1,
+		"type": "Mitigation",
+		"section": "Any",
+		"grid": "0,0/1,0"
 	}
 }

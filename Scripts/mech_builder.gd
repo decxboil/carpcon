@@ -3,11 +3,11 @@ extends Control
 @onready var slot_scene = preload("res://Scenes/grid_slot.tscn")
 @onready var item_scene = preload("res://Scenes/item.tscn")
 
-@onready var head_container = $ColorRect/HeadContainer
-@onready var body_container = $ColorRect/BodyContainer
-@onready var l_arm_container = $ColorRect/LeftArmContainer
-@onready var r_arm_container = $ColorRect/RightArmContainer
-@onready var legs_container = $ColorRect/LegsContainer
+@onready var head_container = $MechBuilder/HeadContainer
+@onready var body_container = $MechBuilder/BodyContainer
+@onready var l_arm_container = $MechBuilder/LeftArmContainer
+@onready var r_arm_container = $MechBuilder/RightArmContainer
+@onready var legs_container = $MechBuilder/LegsContainer
 @onready var containers = [body_container, l_arm_container, r_arm_container, head_container, legs_container]
 
 var grid_array := []
@@ -65,7 +65,7 @@ func _on_slot_mouse_exited(a_Slot):
 func _on_button_spawn_pressed():
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
-	new_item.load_item(1)
+	new_item.load_item(randi_range(1,4))
 	new_item.selected = true
 	item_held = new_item
 
@@ -84,6 +84,9 @@ func check_slot_availability(a_Slot):
 			can_place = false
 			return
 		if grid_array[grid_to_check].get_parent() != current_slot.get_parent():
+			can_place = false
+			return
+		if item_held.part_section != "Any" and grid_array[grid_to_check].get_parent().get_name() != (item_held.part_section + "Container"):
 			can_place = false
 			return
 		can_place = true
