@@ -11,7 +11,7 @@ var is_hovering := false
 var locked := true
 enum States {DEFAULT, TAKEN, FREE, LOCKED}
 var state := States.DEFAULT
-var equipment_installed = null
+var installed_item = null
 
 func set_color(a_state = States.DEFAULT):
 	match a_state:

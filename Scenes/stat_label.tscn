@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bcjln1y2kyi6j"]
+
+[node name="Label" type="Label"]
+size_flags_horizontal = 4
+horizontal_alignment = 1

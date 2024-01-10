@@ -24,7 +24,6 @@ anchor_bottom = 1.0
 offset_right = -607.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_e2epo")
 
 [node name="MechBuilder" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(545, 648)
@@ -32,6 +31,7 @@ layout_mode = 0
 offset_right = 545.0
 offset_bottom = 648.0
 color = Color(0.0823529, 0.109804, 0.294118, 1)
+script = ExtResource("1_e2epo")
 
 [node name="Header" type="HBoxContainer" parent="MechBuilder"]
 custom_minimum_size = Vector2(0, 80)
@@ -186,15 +186,17 @@ offset_bottom = 647.0
 color = Color(0.215686, 0.215686, 0.215686, 1)
 
 [node name="StatsList" type="VBoxContainer" parent="Stats"]
-layout_mode = 2
-offset_right = 1.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("9_34ety")
 
-[node name="Label" type="Label" parent="Stats/StatsList"]
-layout_mode = 2
-
-[connection signal="pressed" from="MechBuilder/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
+[connection signal="item_installed" from="MechBuilder" to="Stats/StatsList" method="_on_mech_builder_item_installed"]
+[connection signal="item_removed" from="MechBuilder" to="Stats/StatsList" method="_on_mech_builder_item_removed"]
+[connection signal="pressed" from="MechBuilder/Header/Button_Spawn" to="MechBuilder" method="_on_button_spawn_pressed"]
 [connection signal="button_down" from="SaveButton" to="SaveButton" method="_on_button_down"]
 [connection signal="area_entered" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="SaveButton/Area2D" to="SaveButton" method="_on_area_2d_area_exited"]

@@ -6,7 +6,10 @@ var item_ID : int
 var item_grids := []
 var selected = false
 var grid_anchor = null
+
 var part_section = null
+var weight
+var part_name = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +21,10 @@ func _process(delta):
 
 func load_item(a_itemID : int):
 	part_section = DataHandler.item_data[str(a_itemID)]["section"]
-	var icon_path = "res://Assets/Item Sprites/" + part_section + " Parts/" + DataHandler.item_data[str(a_itemID)]["name"] + ".png"
+	part_name = DataHandler.item_data[str(a_itemID)]["name"]
+	weight = DataHandler.item_data[str(a_itemID)]["weight"]
+	
+	var icon_path = "res://Assets/Item Sprites/" + part_section + " Parts/" + part_name + ".png"
 	IconRect_path.texture = load(icon_path)
 	for grid in DataHandler.item_grid_data[str(a_itemID)]:
 		var converter_array := []

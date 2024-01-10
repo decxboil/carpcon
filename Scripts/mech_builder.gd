@@ -1,13 +1,13 @@
-extends Control
+extends ColorRect
 
 @onready var slot_scene = preload("res://Scenes/grid_slot.tscn")
 @onready var item_scene = preload("res://Scenes/item.tscn")
 
-@onready var head_container = $MechBuilder/HeadContainer
-@onready var body_container = $MechBuilder/BodyContainer
-@onready var l_arm_container = $MechBuilder/LeftArmContainer
-@onready var r_arm_container = $MechBuilder/RightArmContainer
-@onready var legs_container = $MechBuilder/LegsContainer
+@onready var head_container = $HeadContainer
+@onready var body_container = $BodyContainer
+@onready var l_arm_container = $LeftArmContainer
+@onready var r_arm_container = $RightArmContainer
+@onready var legs_container = $LegsContainer
 @onready var containers = [body_container, l_arm_container, r_arm_container, head_container, legs_container]
 
 var grid_array := []
@@ -15,6 +15,9 @@ var item_held = null
 var current_slot = null
 var can_place := false
 var icon_anchor : Vector2
+
+signal item_installed(a_Item)
+signal item_removed(a_Item)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -134,26 +137,30 @@ func place_item():
 	for grid in item_held.item_grids:
 		var grid_to_check = current_slot.slot_ID + grid[0] + grid[1] * column_count
 		grid_array[grid_to_check].state = grid_array[grid_to_check].States.TAKEN
-		grid_array[grid_to_check].equipment_installed = item_held
-		
-		item_held = null
-		clear_grid()
+		grid_array[grid_to_check].installed_item = item_held
+	
+	emit_signal("item_installed", item_held)
+	
+	item_held = null
+	clear_grid()
 
 func pickup_item():
-	if not current_slot or not current_slot.equipment_installed:
+	if not current_slot or not current_slot.installed_item:
 		return
 	
 	var column_count = current_slot.get_parent().columns
-	item_held = current_slot.equipment_installed
+	item_held = current_slot.installed_item
 	item_held.selected = true
 	
 	for grid in item_held.item_grids:
 		var grid_to_check = item_held.grid_anchor.slot_ID + grid[0] + grid[1] * column_count
 		grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE
-		grid_array[grid_to_check].equipment_installed = null
+		grid_array[grid_to_check].installed_item = null
 	
 	check_slot_availability(current_slot)
 	clear_grid.call_deferred(current_slot)
+	
+	emit_signal("item_removed", item_held)
 
 func drop_item():
 	item_held.queue_free()
