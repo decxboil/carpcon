@@ -10,6 +10,8 @@ extends ColorRect
 @onready var legs_container = $LegsContainer
 @onready var containers = [body_container, l_arm_container, r_arm_container, head_container, legs_container]
 
+var save_path = "res://Data/frame_data.fsh"
+
 var grid_array := []
 var item_held = null
 var current_slot = null
@@ -24,9 +26,6 @@ func _ready():
 	for container in containers:
 		for i in container.capacity:
 			create_slot(container)
-	
-	for i in grid_array.size():
-		pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -49,7 +48,6 @@ func create_slot(container):
 	new_slot.slot_ID = grid_array.size()
 	container.add_child(new_slot)
 	grid_array.push_back(new_slot)
-	new_slot.unlock()
 	new_slot.slot_entered.connect(_on_slot_mouse_entered)
 	new_slot.slot_exited.connect(_on_slot_mouse_exited)
 
@@ -110,7 +108,7 @@ func set_grids(a_Slot):
 			grid_array[grid_to_check].set_color(grid_array[grid_to_check].States.FREE)
 			
 			if grid[1] < icon_anchor.x: icon_anchor.x = grid[1]
-			if grid[0] < icon_anchor.y: icon_anchor.y = grid[0]	
+			if grid[0] < icon_anchor.y: icon_anchor.y = grid[0]
 		else:
 			grid_array[grid_to_check].set_color(grid_array[grid_to_check].States.TAKEN)
 
@@ -165,3 +163,15 @@ func pickup_item():
 func drop_item():
 	item_held.queue_free()
 	item_held = null
+
+func load_frame_data():
+	var file = FileAccess.open(save_path, FileAccess.READ)
+	var dict = JSON.parse_string(file.get_as_text())
+	for index in dict["unlocks"]:
+		grid_array[index].unlock()
+
+func _on_frame_builder_load_test():
+	var file = FileAccess.open(save_path, FileAccess.READ)
+	var dict = JSON.parse_string(file.get_as_text())
+	for index in dict["unlocks"]:
+		grid_array[index].unlock()
