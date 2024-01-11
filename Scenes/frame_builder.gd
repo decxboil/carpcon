@@ -3,6 +3,7 @@ extends ColorRect
 @onready var slot_scene = preload("res://Scenes/grid_slot.tscn")
 @onready var item_scene = preload("res://Scenes/item.tscn")
 
+@onready var name_input = $LineEdit
 @onready var head_container = $HeadContainer
 @onready var body_container = $BodyContainer
 @onready var l_arm_container = $LeftArmContainer
@@ -15,10 +16,8 @@ var current_slot = null
 var icon_anchor : Vector2
 var can_unlock := false
 
-var save_data := {}
 var unlocks := []
-var save_path = "res://Data/frame_data.fsh"
-signal load_test
+var save_path = "res://Data/frame_data.json"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -68,9 +67,19 @@ func toggle_locked():
 		current_slot.lock()
 
 func _on_save_button_button_down():
-	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	var file = FileAccess.open(save_path, FileAccess.READ)
+	var save_data = {}
+	save_data = JSON.parse_string(file.get_as_text())
+	file.close()
+	
+	file = FileAccess.open(save_path, FileAccess.WRITE)
+	if !save_data:
+		save_data = {}
 	unlocks.sort()
-	save_data["unlocks"] = unlocks
+	var frame_name = name_input.text
+	if !save_data.has(frame_name):
+		save_data[frame_name] = {}
+	save_data[frame_name]["unlocks"] = unlocks
 	file.store_string(JSON.stringify(save_data))
 	file.close()
-	emit_signal("load_test")
+	print("Saved frame " + frame_name + " at " + save_path)

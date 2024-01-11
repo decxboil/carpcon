@@ -14,7 +14,7 @@ func _ready():
 	update_labels()
 
 func update_labels():
-	for key in label_dict.keys():
+	for key in stats_dict.keys():
 		label_dict[key].text = key + ": " + str(stats_dict[key])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -2,7 +2,7 @@ extends Node
 
 var item_data := {}
 var item_grid_data := {}
-@onready var item_data_path = "res://Data/item_data.json"
+@onready var item_data_path = "res://Data/item_data.fsh"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -164,14 +164,8 @@ func drop_item():
 	item_held.queue_free()
 	item_held = null
 
-func load_frame_data():
-	var file = FileAccess.open(save_path, FileAccess.READ)
-	var dict = JSON.parse_string(file.get_as_text())
-	for index in dict["unlocks"]:
-		grid_array[index].unlock()
-
-func _on_frame_builder_load_test():
-	var file = FileAccess.open(save_path, FileAccess.READ)
-	var dict = JSON.parse_string(file.get_as_text())
-	for index in dict["unlocks"]:
+func _on_frame_chooser_load_frame(a_Unlocks):
+	for grid in grid_array:
+		grid.lock()
+	for index in a_Unlocks:
 		grid_array[index].unlock()

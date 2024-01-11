@@ -1,0 +1,153 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1fkrbliehdmj"]
+
+[ext_resource type="Script" path="res://Scenes/frame_builder.gd" id="1_ivcks"]
+[ext_resource type="Script" path="res://Scripts/Grid Container Scripts/HeadContainer.gd" id="2_47tkd"]
+[ext_resource type="Script" path="res://Scripts/Grid Container Scripts/BodyContainer.gd" id="3_alv6q"]
+[ext_resource type="Script" path="res://Scripts/Grid Container Scripts/LeftArmContainer.gd" id="4_ht8dm"]
+[ext_resource type="Script" path="res://Scripts/Grid Container Scripts/RightArmContainer.gd" id="5_2flme"]
+[ext_resource type="Script" path="res://Scripts/Grid Container Scripts/LegsContainer.gd" id="6_dyk63"]
+[ext_resource type="Texture2D" uid="uid://wtg50vphff2i" path="res://icon.svg" id="7_3b1wp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6m6hc"]
+
+[node name="FrameBuilder" type="ColorRect"]
+custom_minimum_size = Vector2(545, 648)
+offset_left = 605.0
+offset_top = -1.0
+offset_right = 1150.0
+offset_bottom = 647.0
+color = Color(0.0823529, 0.109804, 0.294118, 1)
+script = ExtResource("1_ivcks")
+
+[node name="HeadContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -134.0
+offset_right = 45.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+script = ExtResource("2_47tkd")
+capacity = 9
+
+[node name="BodyContainer" type="GridContainer" parent="."]
+material = SubResource("ShaderMaterial_6m6hc")
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -42.0
+offset_right = 90.0
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+script = ExtResource("3_alv6q")
+capacity = 36
+
+[node name="LeftArmContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -42.0
+offset_right = 180.0
+offset_bottom = 48.0
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+script = ExtResource("4_ht8dm")
+capacity = 18
+
+[node name="RightArmContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -42.0
+offset_bottom = 48.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+script = ExtResource("5_2flme")
+capacity = 18
+
+[node name="LegsContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(90, 180)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+script = ExtResource("6_dyk63")
+capacity = 18
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 13.0
+offset_right = 431.0
+offset_bottom = 59.0
+placeholder_text = "Mech name here..."
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 442.0
+offset_top = 16.0
+offset_right = 524.0
+offset_bottom = 56.0
+
+[node name="TextureRect" type="TextureRect" parent="SaveButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_3b1wp")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SaveButton"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 16.0
+offset_right = 79.0
+offset_bottom = 42.0
+text = "Save
+"
+
+[connection signal="button_down" from="SaveButton" to="." method="_on_save_button_button_down"]

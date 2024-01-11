@@ -35,6 +35,6 @@ func load_item(a_itemID : int):
 func snap_to(destination: Vector2):
 	var tween = get_tree().create_tween()
 	
-	var snap_adjustment = Vector2(2,0)
+	var snap_adjustment = IconRect_path.size/32
 	tween.tween_property(self, "global_position", destination + snap_adjustment, 0.01).set_trans(Tween.TRANS_SINE)
 	selected = false
