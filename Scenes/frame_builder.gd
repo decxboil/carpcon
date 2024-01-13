@@ -25,7 +25,7 @@ func _ready():
 		for i in container.capacity:
 			create_slot(container)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("mouse_leftclick"):
 		for container in containers:
 			if container.get_global_rect().has_point(get_global_mouse_position()):

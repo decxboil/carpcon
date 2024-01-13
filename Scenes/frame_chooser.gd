@@ -3,7 +3,7 @@ extends OptionButton
 var save_path = "res://Data/frame_data.json"
 
 var frame_data = {}
-signal load_frame(a_Unlocks)
+signal load_frame(frame)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,12 +17,8 @@ func _ready():
 	for frame in frame_data:
 		self.add_item(frame.capitalize())
 	
-	emit_signal.call_deferred("load_frame", frame_data[frame_data.keys()[0]]["unlocks"])
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	emit_signal.call_deferred("load_frame", frame_data[frame_data.keys()[0]])
 
 func _on_item_selected(index):
 	var frame_name = get_item_text(index).to_snake_case()
-	emit_signal("load_frame", frame_data[frame_name]["unlocks"])
+	emit_signal("load_frame", frame_data[frame_name])

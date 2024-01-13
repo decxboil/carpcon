@@ -28,7 +28,7 @@ func _ready():
 			create_slot(container)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if item_held:
 		if Input.is_action_just_pressed("mouse_leftclick"):
 			for container in containers:
@@ -59,7 +59,7 @@ func _on_slot_mouse_entered(a_Slot):
 		set_grids.call_deferred(current_slot)
 	pass
 	
-func _on_slot_mouse_exited(a_Slot):
+func _on_slot_mouse_exited(_a_Slot):
 	clear_grid()
 	pass
 
@@ -156,7 +156,7 @@ func pickup_item():
 		grid_array[grid_to_check].installed_item = null
 	
 	check_slot_availability(current_slot)
-	clear_grid.call_deferred(current_slot)
+	set_grids.call_deferred(current_slot)
 	
 	emit_signal("item_removed", item_held)
 
@@ -164,8 +164,8 @@ func drop_item():
 	item_held.queue_free()
 	item_held = null
 
-func _on_frame_chooser_load_frame(a_Unlocks):
+func _on_frame_chooser_load_frame(a_Frame):
 	for grid in grid_array:
 		grid.lock()
-	for index in a_Unlocks:
+	for index in a_Frame["unlocks"]:
 		grid_array[index].unlock()

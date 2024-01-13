@@ -22,8 +22,8 @@ grow_vertical = 2
 
 [node name="MechBuilder" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(545, 648)
-layout_mode = 0
-offset_right = 545.0
+layout_mode = 1
+offset_right = 625.0
 offset_bottom = 648.0
 color = Color(0.0823529, 0.109804, 0.294118, 1)
 script = ExtResource("1_e2epo")
@@ -51,9 +51,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -45.0
-offset_top = -134.0
+offset_top = -174.0
 offset_right = 45.0
-offset_bottom = -44.0
+offset_bottom = -84.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 0
@@ -72,9 +72,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -90.0
-offset_top = -42.0
+offset_top = -59.0
 offset_right = 90.0
-offset_bottom = 138.0
+offset_bottom = 121.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -91,9 +91,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -42.0
+offset_top = -59.0
 offset_right = 180.0
-offset_bottom = 48.0
+offset_bottom = 31.0
 grow_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
@@ -110,8 +110,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -180.0
-offset_top = -42.0
-offset_bottom = 48.0
+offset_top = -59.0
+offset_bottom = 31.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/h_separation = 0
@@ -149,23 +149,27 @@ script = ExtResource("7_qaddd")
 
 [node name="Stats" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 561.0
-offset_top = 64.0
-offset_right = 784.0
-offset_bottom = 647.0
+offset_left = 640.0
+offset_right = 880.0
+offset_bottom = 600.0
 color = Color(0.215686, 0.215686, 0.215686, 1)
 
-[node name="StatsList" type="VBoxContainer" parent="Stats"]
+[node name="MarginContainer" type="MarginContainer" parent="Stats"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 20
+
+[node name="StatsList" type="VBoxContainer" parent="Stats/MarginContainer"]
+layout_mode = 2
 script = ExtResource("9_34ety")
 
-[connection signal="item_installed" from="MechBuilder" to="Stats/StatsList" method="_on_mech_builder_item_installed"]
-[connection signal="item_removed" from="MechBuilder" to="Stats/StatsList" method="_on_mech_builder_item_removed"]
+[connection signal="item_installed" from="MechBuilder" to="Stats/MarginContainer/StatsList" method="_on_mech_builder_item_installed"]
+[connection signal="item_removed" from="MechBuilder" to="Stats/MarginContainer/StatsList" method="_on_mech_builder_item_removed"]
 [connection signal="pressed" from="MechBuilder/Header/Button_Spawn" to="MechBuilder" method="_on_button_spawn_pressed"]
 [connection signal="item_selected" from="MechBuilder/FrameChooser" to="MechBuilder/FrameChooser" method="_on_item_selected"]
 [connection signal="load_frame" from="MechBuilder/FrameChooser" to="MechBuilder" method="_on_frame_chooser_load_frame"]
+[connection signal="load_frame" from="MechBuilder/FrameChooser" to="Stats/MarginContainer/StatsList" method="_on_frame_chooser_load_frame"]

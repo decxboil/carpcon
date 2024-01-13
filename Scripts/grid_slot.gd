@@ -30,7 +30,7 @@ func unlock():
 	locked = false
 	padlock.visible = false
 
-func _process(delta):
+func _process(_delta):
 	if state == States.LOCKED:
 		return
 	if get_global_rect().has_point(get_global_mouse_position()):

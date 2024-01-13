@@ -24,9 +24,6 @@ func set_grid_data():
 			temp_grid_array.push_back(point.split(","))
 		item_grid_data[item] = temp_grid_array
 
-func _process(delta):
-	pass
-
 var fisher = {
 	"name": "Natalie Leguin",
 	"callsign": "Genie",
