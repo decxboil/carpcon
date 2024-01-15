@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d1fkrbliehdmj"]
 
-[ext_resource type="Script" path="res://Scenes/frame_builder.gd" id="1_ivcks"]
+[ext_resource type="Script" path="res://Scripts/frame_builder.gd" id="1_ivcks"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/HeadContainer.gd" id="2_47tkd"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/BodyContainer.gd" id="3_alv6q"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/LeftArmContainer.gd" id="4_ht8dm"]

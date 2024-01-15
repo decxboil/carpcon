@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4c1rk3pk616a"]
+
+[ext_resource type="PackedScene" uid="uid://d4c1rk3pk616a" path="res://Scenes/mech_builder.tscn" id="2_2n63v"]
+
+[node name="MechLayout" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MechBuilder" parent="." instance=ExtResource("2_2n63v")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 0.0
+grow_horizontal = 1
+grow_vertical = 1

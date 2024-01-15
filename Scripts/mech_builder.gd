@@ -17,6 +17,8 @@ var item_held = null
 var current_slot = null
 var can_place := false
 var icon_anchor : Vector2
+enum Modes {EQUIP, PLACE, UNLOCK}
+var mode = Modes.EQUIP
 
 signal item_installed(a_Item)
 signal item_removed(a_Item)
@@ -29,18 +31,24 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if item_held:
-		if Input.is_action_just_pressed("mouse_leftclick"):
-			for container in containers:
-				if container.get_global_rect().has_point(get_global_mouse_position()):
-					place_item()
-		elif Input.is_action_just_pressed("mouse_rightclick"):
-			drop_item()
-	else:
-		if Input.is_action_just_pressed("mouse_leftclick"):
-			for container in containers:
-				if container.get_global_rect().has_point(get_global_mouse_position()):
-					pickup_item()
+	if Input.is_action_just_pressed("mouse_leftclick"):
+		match mode:
+			Modes.EQUIP:
+				for container in containers:
+					if container.get_global_rect().has_point(get_global_mouse_position()):
+						pickup_item()
+			Modes.PLACE:
+				for container in containers:
+					if container.get_global_rect().has_point(get_global_mouse_position()):
+						place_item()
+			Modes.UNLOCK:
+				for container in containers:
+					if container.get_global_rect().has_point(get_global_mouse_position()):
+						toggle_locked()
+	elif Input.is_action_just_pressed("mouse_rightclick"):
+		match mode:
+			Modes.PLACE:
+				drop_item()
 	pass
 
 func create_slot(container):
@@ -57,6 +65,9 @@ func _on_slot_mouse_entered(a_Slot):
 	if item_held:
 		check_slot_availability(current_slot)
 		set_grids.call_deferred(current_slot)
+	if mode == Modes.UNLOCK:
+		check_lock_availability(current_slot)
+		set_lock_grids.call_deferred(current_slot)
 	pass
 	
 func _on_slot_mouse_exited(_a_Slot):
@@ -69,6 +80,10 @@ func _on_button_spawn_pressed():
 	new_item.load_item(randi_range(1,4))
 	new_item.selected = true
 	item_held = new_item
+	mode = Modes.PLACE
+
+func check_lock_availability(a_Slot):
+	pass
 
 func check_slot_availability(a_Slot):
 	var column_count = a_Slot.get_parent().columns
@@ -91,6 +106,9 @@ func check_slot_availability(a_Slot):
 			can_place = false
 			return
 		can_place = true
+
+func set_lock_grids(a_Slot):
+	grid_array[a_Slot.slot_ID].set_color(grid_array[a_Slot.slot_ID].States.FREE)
 
 func set_grids(a_Slot):
 	var column_count = a_Slot.get_parent().columns
@@ -140,6 +158,7 @@ func place_item():
 	emit_signal("item_installed", item_held)
 	
 	item_held = null
+	mode = Modes.EQUIP
 	clear_grid()
 
 func pickup_item():
@@ -159,13 +178,32 @@ func pickup_item():
 	set_grids.call_deferred(current_slot)
 	
 	emit_signal("item_removed", item_held)
+	
+	mode = Modes.PLACE
 
 func drop_item():
 	item_held.queue_free()
 	item_held = null
+	mode = Modes.EQUIP
+
+func toggle_locked():
+	if not current_slot:
+		return
+	
+	if current_slot.locked:
+		current_slot.unlock()
 
 func _on_frame_chooser_load_frame(a_Frame):
 	for grid in grid_array:
 		grid.lock()
 	for index in a_Frame["unlocks"]:
 		grid_array[index].unlock()
+
+func _on_unlock_toggle_button_down():
+	if item_held:
+		drop_item()
+	
+	if mode == Modes.UNLOCK:
+		mode = Modes.EQUIP
+	else:
+		mode = Modes.UNLOCK
