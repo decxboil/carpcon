@@ -20,7 +20,7 @@ func load_data(a_path):
 func set_grid_data():
 	for item in item_data.keys():
 		var temp_grid_array := []
-		for point in item_data[item]["grid"].split("/"):
+		for point in item_data[item]["grid"]:
 			temp_grid_array.push_back(point.split(","))
 		item_grid_data[item] = temp_grid_array
 

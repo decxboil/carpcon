@@ -77,7 +77,7 @@ func _on_slot_mouse_exited(_a_Slot):
 func _on_button_spawn_pressed():
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
-	new_item.load_item(randi_range(1,4))
+	new_item.load_item("far_sensors_i")
 	new_item.selected = true
 	item_held = new_item
 	mode = Modes.PLACE
@@ -102,7 +102,7 @@ func check_slot_availability(a_Slot):
 		if grid_array[grid_to_check].get_parent() != current_slot.get_parent():
 			can_place = false
 			return
-		if item_held.part_section != "Any" and grid_array[grid_to_check].get_parent().get_name() != (item_held.part_section + "Container"):
+		if item_held.item_data["section"] != "Any" and grid_array[grid_to_check].get_parent().get_name() != (item_held.item_data["section"].capitalize() + "Container"):
 			can_place = false
 			return
 		can_place = true
@@ -121,7 +121,6 @@ func set_grids(a_Slot):
 			continue
 		if grid_array[grid_to_check].get_parent() != current_slot.get_parent():
 			continue
-		
 		if can_place:
 			grid_array[grid_to_check].set_color(grid_array[grid_to_check].States.FREE)
 			

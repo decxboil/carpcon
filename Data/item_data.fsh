@@ -1,30 +1,27 @@
 {
-	"1": {
-		"name": "Vulcan Cannon",
-		"weight": 2,
-		"type": "Weapon",
-		"section": "Head",
-		"grid": "0,0/0,1"
-	},
-	"2": {
-		"name": "Shark Teeth",
-		"weight": 3,
-		"type": "Weapon",
-		"section": "Head",
-		"grid": "0,0/0,1/1,1/2,1/2,0"
-	},
-	"3": {
-		"name": "AI Core",
-		"weight": 2,
-		"type": "Active",
-		"section": "Head",
-		"grid": "0,0/0,1"
-	},
-	"4": {
-		"name": "Armor 2x1",
-		"weight": 1,
-		"type": "Mitigation",
-		"section": "Any",
-		"grid": "0,0/1,0"
-	}
+	"far_sensors_i": {
+        "action text": null,
+        "ap": null,
+        "close": null,
+        "core": null,
+        "evade": null,
+        "far": 1,
+        "grid": [
+            "[0, 0]",
+            "[0, 1]",
+            "[0, 2]"
+        ],
+        "mental": null,
+        "name": "Far Sensors I",
+        "power": null,
+        "repair": null,
+        "section": "head",
+        "sensor": 3,
+        "speed": null,
+        "tags": null,
+        "type": "passive",
+        "weight": 2,
+        "weight_cap": null,
+        "willpower": null
+    }
 }

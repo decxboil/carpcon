@@ -9,7 +9,7 @@ signal slot_exited(slot)
 var slot_ID
 var is_hovering := false
 var locked := true
-enum States {DEFAULT, TAKEN, FREE, LOCKED}
+enum States {DEFAULT, TAKEN, FREE}
 var state := States.DEFAULT
 var installed_item = null
 
@@ -31,8 +31,6 @@ func unlock():
 	padlock.visible = false
 
 func _process(_delta):
-	if state == States.LOCKED:
-		return
 	if get_global_rect().has_point(get_global_mouse_position()):
 		if not is_hovering:
 			is_hovering = true

@@ -36,7 +36,7 @@
             94,
             97
         ],
-        "weight": 12
+        "weight_cap": 12
     },
     "angler": {
         "ap": 2,
@@ -72,7 +72,7 @@
             93,
             95
         ],
-        "weight": 10
+        "weight_cap": 10
     },
     "buccaneer": {
         "ap": 3,
@@ -109,7 +109,7 @@
             93,
             95
         ],
-        "weight": 14
+        "weight_cap": 14
     },
     "deringer": {
         "ap": 2,
@@ -148,7 +148,7 @@
             88,
             91
         ],
-        "weight": 12
+        "weight_cap": 12
     },
     "jolly_roger": {
         "ap": 3,
@@ -189,7 +189,7 @@
             79,
             88
         ],
-        "weight": 15
+        "weight_cap": 15
     },
     "lamprey": {
         "ap": 2,
@@ -223,7 +223,7 @@
             91,
             92
         ],
-        "weight": 12
+        "weight_cap": 12
     },
     "lonestar": {
         "ap": 2,
@@ -262,7 +262,7 @@
             93,
             95
         ],
-        "weight": 12
+        "weight_cap": 12
     },
     "mariner": {
         "ap": 3,
@@ -297,7 +297,7 @@
             88,
             91
         ],
-        "weight": 12
+        "weight_cap": 12
     },
     "parallel": {
         "ap": 2,
@@ -332,7 +332,7 @@
             90,
             92
         ],
-        "weight": 13
+        "weight_cap": 13
     },
     "pridemoore": {
         "ap": 2,
@@ -367,7 +367,7 @@
             90,
             92
         ],
-        "weight": 11
+        "weight_cap": 11
     },
     "quadrilateral": {
         "ap": 2,
@@ -403,7 +403,7 @@
             94,
             97
         ],
-        "weight": 11
+        "weight_cap": 11
     },
     "rhombus": {
         "ap": 2,
@@ -441,6 +441,6 @@
             96,
             97
         ],
-        "weight": 12
+        "weight_cap": 12
     }
 }

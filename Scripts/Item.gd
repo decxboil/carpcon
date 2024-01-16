@@ -2,14 +2,11 @@ extends Node2D
 
 @onready var IconRect_path = $Icon
 
-var item_ID : int
+var item_ID : String
 var item_grids := []
 var selected = false
 var grid_anchor = null
-
-var part_section = null
-var weight
-var part_name = ""
+var item_data := {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,12 +16,10 @@ func _process(delta):
 	if selected:
 		global_position = lerp(global_position, get_global_mouse_position() - IconRect_path.size/2, 60 * delta)
 
-func load_item(a_itemID : int):
-	part_section = DataHandler.item_data[str(a_itemID)]["section"]
-	part_name = DataHandler.item_data[str(a_itemID)]["name"]
-	weight = DataHandler.item_data[str(a_itemID)]["weight"]
+func load_item(a_itemID : String):
+	item_data = DataHandler.item_data[str(a_itemID)]
 	
-	var icon_path = "res://Assets/Item Sprites/" + part_section + " Parts/" + part_name + ".png"
+	var icon_path = "res://Assets/Item Sprites/" + item_data["section"] + " Parts/" + item_data["name"] + ".png"
 	IconRect_path.texture = load(icon_path)
 	for grid in DataHandler.item_grid_data[str(a_itemID)]:
 		var converter_array := []
