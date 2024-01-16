@@ -102,7 +102,7 @@ func check_slot_availability(a_Slot):
 		if grid_array[grid_to_check].get_parent() != current_slot.get_parent():
 			can_place = false
 			return
-		if item_held.item_data["section"] != "Any" and grid_array[grid_to_check].get_parent().get_name() != (item_held.item_data["section"].capitalize() + "Container"):
+		if item_held.item_data["section"] != "Any" and !grid_array[grid_to_check].get_parent().get_name().ends_with(item_held.item_data["section"].capitalize() + "Container"):
 			can_place = false
 			return
 		can_place = true
