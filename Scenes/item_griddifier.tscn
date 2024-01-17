@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbk8gu7lsdmfm"]
 
-[ext_resource type="Script" path="res://Scenes/item_griddifier.gd" id="1_f1qnq"]
+[ext_resource type="Script" path="res://Scripts/item_griddifier.gd" id="1_tanpm"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/BodyContainer.gd" id="3_25wvq"]
 [ext_resource type="Texture2D" uid="uid://wtg50vphff2i" path="res://icon.svg" id="7_huxxq"]
 
@@ -11,7 +11,7 @@ custom_minimum_size = Vector2(545, 648)
 offset_right = 625.0
 offset_bottom = 648.0
 color = Color(0.0823529, 0.109804, 0.294118, 1)
-script = ExtResource("1_f1qnq")
+script = ExtResource("1_tanpm")
 
 [node name="BodyContainer" type="GridContainer" parent="."]
 material = SubResource("ShaderMaterial_6m6hc")

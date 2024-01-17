@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crn6wwhpietxf"
-path="res://.godot/imported/Overclocked Systems.png-24cb35172176c8e24abf65dca01c9756.ctex"
+uid="uid://dicwfmxrigvwb"
+path="res://.godot/imported/Jump Jets.png-b16e735f4abf96a16aaace037f882e7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Chest Parts/Overclocked Systems.png"
-dest_files=["res://.godot/imported/Overclocked Systems.png-24cb35172176c8e24abf65dca01c9756.ctex"]
+source_file="res://Assets/Item Sprites/Leg Parts/Jump Jets.png"
+dest_files=["res://.godot/imported/Jump Jets.png-b16e735f4abf96a16aaace037f882e7d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f3p7xgn3r2qa"
-path="res://.godot/imported/Sensor Box.png-d5743b5f08101ed1958c815bcc54e34a.ctex"
+uid="uid://borx1owfssrky"
+path="res://.godot/imported/Thought Cage.png-89e0d8a12e93da384aa4fc4ca3c888ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Head Parts/Sensor Box.png"
-dest_files=["res://.godot/imported/Sensor Box.png-d5743b5f08101ed1958c815bcc54e34a.ctex"]
+source_file="res://Assets/Item Sprites/Head Parts/Thought Cage.png"
+dest_files=["res://.godot/imported/Thought Cage.png-89e0d8a12e93da384aa4fc4ca3c888ca.ctex"]
 
 [params]
 

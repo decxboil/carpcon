@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var IconRect_path = $Icon
 
-var item_ID : String
 var item_grids := []
 var selected = false
 var grid_anchor = null
@@ -17,11 +16,11 @@ func _process(delta):
 		global_position = lerp(global_position, get_global_mouse_position() - IconRect_path.size/2, 60 * delta)
 
 func load_item(a_itemID : String):
-	item_data = DataHandler.item_data[str(a_itemID)]
+	item_data = DataHandler.item_data[a_itemID]
 	
-	var icon_path = "res://Assets/Item Sprites/" + item_data["section"] + " Parts/" + item_data["name"] + ".png"
+	var icon_path = "res://Assets/Item Sprites/" + item_data["section"].capitalize() + " Parts/" + item_data["name"] + ".png"
 	IconRect_path.texture = load(icon_path)
-	for grid in DataHandler.item_grid_data[str(a_itemID)]:
+	for grid in DataHandler.item_grid_data[a_itemID]:
 		var converter_array := []
 		for i in grid:
 			converter_array.push_back(int(i))

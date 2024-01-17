@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbpft5g55rotb"
-path="res://.godot/imported/Shield.png-45c36240016cc1f14d767cdbc1e49c11.ctex"
+uid="uid://f3p7xgn3r2qa"
+path="res://.godot/imported/Sensors Box.png-cd71c5d7da836e5384ab58b1987dc5c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Any Parts/Shield.png"
-dest_files=["res://.godot/imported/Shield.png-45c36240016cc1f14d767cdbc1e49c11.ctex"]
+source_file="res://Assets/Item Sprites/Head Parts/Sensors Box.png"
+dest_files=["res://.godot/imported/Sensors Box.png-cd71c5d7da836e5384ab58b1987dc5c2.ctex"]
 
 [params]
 

@@ -47,7 +47,7 @@ func _on_slot_mouse_entered(a_Slot):
 func set_grids(a_Slot):
 	grid_array[a_Slot.slot_ID].set_color(grid_array[a_Slot.slot_ID].States.FREE)
 
-func _on_slot_mouse_exited(a_Slot):
+func _on_slot_mouse_exited():
 	clear_grid()
 
 func clear_grid():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqvwx1bx6sg32"
-path="res://.godot/imported/Jumper Cable.png-3e0421debadbca8e48e6bc878229d6b6.ctex"
+uid="uid://ppd01h117gjk"
+path="res://.godot/imported/Vertical Armor.png-b1451e262ff82cccb9c7b2045a3d9178.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Chest Parts/Jumper Cable.png"
-dest_files=["res://.godot/imported/Jumper Cable.png-3e0421debadbca8e48e6bc878229d6b6.ctex"]
+source_file="res://Assets/Item Sprites/Any Parts/Vertical Armor.png"
+dest_files=["res://.godot/imported/Vertical Armor.png-b1451e262ff82cccb9c7b2045a3d9178.ctex"]
 
 [params]
 

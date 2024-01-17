@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ppd01h117gjk"
-path="res://.godot/imported/Armor 1x2.png-c556174010149ad7b63af372a4f7fff8.ctex"
+uid="uid://crn6wwhpietxf"
+path="res://.godot/imported/Overclocked Processor.png-64d40241510a619b3f71939f02aba757.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Any Parts/Armor 1x2.png"
-dest_files=["res://.godot/imported/Armor 1x2.png-c556174010149ad7b63af372a4f7fff8.ctex"]
+source_file="res://Assets/Item Sprites/Chest Parts/Overclocked Processor.png"
+dest_files=["res://.godot/imported/Overclocked Processor.png-64d40241510a619b3f71939f02aba757.ctex"]
 
 [params]
 

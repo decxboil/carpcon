@@ -70,17 +70,9 @@ func _on_slot_mouse_entered(a_Slot):
 		set_lock_grids.call_deferred(current_slot)
 	pass
 	
-func _on_slot_mouse_exited(_a_Slot):
+func _on_slot_mouse_exited():
 	clear_grid()
 	pass
-
-func _on_button_spawn_pressed():
-	var new_item = item_scene.instantiate()
-	add_child(new_item)
-	new_item.load_item("far_sensors_i")
-	new_item.selected = true
-	item_held = new_item
-	mode = Modes.PLACE
 
 func check_lock_availability(a_Slot):
 	pass
@@ -206,3 +198,11 @@ func _on_unlock_toggle_button_down():
 		mode = Modes.EQUIP
 	else:
 		mode = Modes.UNLOCK
+
+func _on_part_menu_item_item_selected(a_Item_ID):
+	var new_item = item_scene.instantiate()
+	add_child(new_item)
+	new_item.load_item(a_Item_ID)
+	new_item.selected = true
+	item_held = new_item
+	mode = Modes.PLACE

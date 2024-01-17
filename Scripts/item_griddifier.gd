@@ -28,6 +28,7 @@ func create_slot(container):
 	new_slot.slot_ID = grid_array.size()
 	container.add_child(new_slot)
 	grid_array.push_back(new_slot)
+	new_slot.unlock()
 	new_slot.slot_entered.connect(_on_slot_mouse_entered)
 	new_slot.slot_exited.connect(_on_slot_mouse_exited)
 
@@ -56,12 +57,17 @@ func toggle_selected():
 	var grid_y = current_ID/body_container.columns
 	var grid_x = current_ID%body_container.columns
 	var formatted_coords = "[" + str(grid_x) + ", " + str(grid_y) + "]"
-	grid.push_back(formatted_coords)
 	
-	current_slot.set_color(grid_array[current_ID].States.TAKEN)
-	current_slot.state = current_slot.States.TAKEN
-	
-	print("[" + str(grid_x) + ", " + str(grid_y) + "]")
+	if current_slot.state == current_slot.States.DEFAULT:
+		grid.push_back(formatted_coords)
+		current_slot.set_color(grid_array[current_ID].States.TAKEN)
+		current_slot.state = current_slot.States.TAKEN
+		print("Added " + formatted_coords)
+	else:
+		grid.erase(formatted_coords)
+		current_slot.set_color(grid_array[current_ID].States.DEFAULT)
+		current_slot.state = current_slot.States.DEFAULT
+		print("Removed " + formatted_coords)
 
 func _on_save_button_button_down():
 	var file = FileAccess.open(save_path, FileAccess.READ)
@@ -69,12 +75,13 @@ func _on_save_button_button_down():
 	save_data = JSON.parse_string(file.get_as_text())
 	file.close()
 	
-	file = FileAccess.open(save_path, FileAccess.WRITE)
 	if !save_data:
 		save_data = {}
 	grid.sort()
 	var item_name = name_input.text
 	save_data[item_name]["grid"] = grid
+	
+	file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(save_data))
 	file.close()
 	print("Saved item " + item_name + " at " + save_path)

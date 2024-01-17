@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx8s4iaox16a2"]
+
+[ext_resource type="Script" path="res://Scripts/part_menu_item.gd" id="1_hhkp4"]
+
+[node name="PartMenuItem" type="ColorRect"]
+custom_minimum_size = Vector2(120, 75)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.215686, 0.215686, 0.215686, 1)
+script = ExtResource("1_hhkp4")
+
+[node name="Texture" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 15
+autowrap_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]

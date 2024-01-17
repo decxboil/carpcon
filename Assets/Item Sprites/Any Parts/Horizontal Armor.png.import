@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxqcv0g2wwqwi"
-path="res://.godot/imported/Energy Shield.png-e1ec69195a13a783de39f44ceecb9050.ctex"
+uid="uid://dnc50b64fpu3i"
+path="res://.godot/imported/Horizontal Armor.png-1646cb684295856ae7e182fdb12be55c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Any Parts/Energy Shield.png"
-dest_files=["res://.godot/imported/Energy Shield.png-e1ec69195a13a783de39f44ceecb9050.ctex"]
+source_file="res://Assets/Item Sprites/Any Parts/Horizontal Armor.png"
+dest_files=["res://.godot/imported/Horizontal Armor.png-1646cb684295856ae7e182fdb12be55c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://borx1owfssrky"
-path="res://.godot/imported/Thought Shield.png-2132e1bdbeaf0ee84138b0d4e6a0f3c0.ctex"
+uid="uid://cbpft5g55rotb"
+path="res://.godot/imported/Shield.png-40ef692e0f8adda1c9277ed54d708bbb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Any Parts/Thought Shield.png"
-dest_files=["res://.godot/imported/Thought Shield.png-2132e1bdbeaf0ee84138b0d4e6a0f3c0.ctex"]
+source_file="res://Assets/Item Sprites/Arm Parts/Shield.png"
+dest_files=["res://.godot/imported/Shield.png-40ef692e0f8adda1c9277ed54d708bbb.ctex"]
 
 [params]
 

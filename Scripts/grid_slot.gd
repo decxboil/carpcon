@@ -38,4 +38,4 @@ func _process(_delta):
 	else:
 		if is_hovering:
 			is_hovering = false
-			emit_signal("slot_exited", self)
+			emit_signal("slot_exited")
