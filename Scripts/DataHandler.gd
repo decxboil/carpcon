@@ -7,7 +7,7 @@ var item_grid_data := {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_data(item_data_path)
-	set_grid_data()
+	set_grid_and_icon_data()
 
 func load_data(a_path):
 	if not FileAccess.file_exists(a_path):
@@ -17,12 +17,22 @@ func load_data(a_path):
 	item_data = JSON.parse_string(file.get_as_text())
 	file.close()
 
-func set_grid_data():
+func set_grid_and_icon_data():
 	for item in item_data.keys():
 		var temp_grid_array := []
 		for point in item_data[item]["grid"]:
 			temp_grid_array.push_back(point.split(","))
 		item_grid_data[item] = temp_grid_array
+		item_data[item]["icon_path"] = "res://Assets/Item Sprites/" + item_data[item]["section"].capitalize() + " Parts/" + item_data[item]["name"] + ".png"
+		if item_data[item]["tags"]:
+			if item_data[item]["tags"].contains("ai core"):
+				item_data[item]["icon_path"] = "res://Assets/Item Sprites/Head Parts/AI Core.png"
+		item_data[item]["icon_scale"] = 1.4
+		if item_data[item]["name"] == "Bulkhead":
+			item_data[item]["icon_scale"] = 0.7
+
+func create_player():
+	return fisher
 
 var fisher = {
 	"name": "Natalie Leguin",
@@ -34,18 +44,10 @@ var fisher = {
 	},
 	"mech_data": {
 		"frame": {
-			"name": "Rhombus",
-			"weight_cap": 12,
-			"close": 5,
-			"far": 5,
-			"evade": 11,
-			"speed": 3,
-			"sensors": 3,
 			
 		},
 		"internals": {
 			
 		}
 	}
-	# "unlocks" : add unlock schema I guess
 }

@@ -4,7 +4,7 @@ extends ColorRect
 @onready var item_scene = preload("res://Scenes/item.tscn")
 
 @onready var name_input = $LineEdit
-@onready var body_container = $BodyContainer
+@onready var chest_container = $ChestContainer
 
 var grid_array := []
 var current_slot = null
@@ -15,12 +15,12 @@ var save_path = "res://Data/item_data.json"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in body_container.capacity:
-		create_slot(body_container)
+	for i in chest_container.capacity:
+		create_slot(chest_container)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("mouse_leftclick"):
-		if body_container.get_global_rect().has_point(get_global_mouse_position()):
+		if chest_container.get_global_rect().has_point(get_global_mouse_position()):
 			toggle_selected()
 
 func create_slot(container):
@@ -54,8 +54,8 @@ func toggle_selected():
 		return
 	
 	var current_ID = current_slot.slot_ID
-	var grid_y = current_ID/body_container.columns
-	var grid_x = current_ID%body_container.columns
+	var grid_y = current_ID/chest_container.columns
+	var grid_x = current_ID%chest_container.columns
 	var formatted_coords = "[" + str(grid_x) + ", " + str(grid_y) + "]"
 	
 	if current_slot.state == current_slot.States.DEFAULT:

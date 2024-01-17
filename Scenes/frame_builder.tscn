@@ -37,7 +37,7 @@ columns = 3
 script = ExtResource("2_47tkd")
 capacity = 9
 
-[node name="BodyContainer" type="GridContainer" parent="."]
+[node name="ChestContainer" type="GridContainer" parent="."]
 material = SubResource("ShaderMaterial_6m6hc")
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 1
@@ -95,7 +95,7 @@ columns = 6
 script = ExtResource("5_2flme")
 capacity = 18
 
-[node name="LegsContainer" type="GridContainer" parent="."]
+[node name="LegContainer" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(90, 180)
 layout_mode = 1
 anchors_preset = 7

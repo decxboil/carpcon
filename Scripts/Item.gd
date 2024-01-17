@@ -18,8 +18,9 @@ func _process(delta):
 func load_item(a_itemID : String):
 	item_data = DataHandler.item_data[a_itemID]
 	
-	var icon_path = "res://Assets/Item Sprites/" + item_data["section"].capitalize() + " Parts/" + item_data["name"] + ".png"
-	IconRect_path.texture = load(icon_path)
+	IconRect_path.texture = load(item_data["icon_path"])
+	IconRect_path.scale.x = item_data["icon_scale"]
+	IconRect_path.scale.y = item_data["icon_scale"]
 	for grid in DataHandler.item_grid_data[a_itemID]:
 		var converter_array := []
 		for i in grid:

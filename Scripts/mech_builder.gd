@@ -4,11 +4,11 @@ extends ColorRect
 @onready var item_scene = preload("res://Scenes/item.tscn")
 
 @onready var head_container = $HeadContainer
-@onready var body_container = $BodyContainer
+@onready var chest_container = $ChestContainer
 @onready var l_arm_container = $LeftArmContainer
 @onready var r_arm_container = $RightArmContainer
-@onready var legs_container = $LegsContainer
-@onready var containers = [body_container, l_arm_container, r_arm_container, head_container, legs_container]
+@onready var leg_container = $LegContainer
+@onready var containers = [chest_container, l_arm_container, r_arm_container, head_container, leg_container]
 
 var save_path = "res://Data/frame_data.fsh"
 
@@ -94,7 +94,7 @@ func check_slot_availability(a_Slot):
 		if grid_array[grid_to_check].get_parent() != current_slot.get_parent():
 			can_place = false
 			return
-		if item_held.item_data["section"] != "Any" and !grid_array[grid_to_check].get_parent().get_name().ends_with(item_held.item_data["section"].capitalize() + "Container"):
+		if item_held.item_data["section"] != "any" and !grid_array[grid_to_check].get_parent().get_name().ends_with(item_held.item_data["section"].capitalize() + "Container"):
 			can_place = false
 			return
 		can_place = true
@@ -199,7 +199,7 @@ func _on_unlock_toggle_button_down():
 	else:
 		mode = Modes.UNLOCK
 
-func _on_part_menu_item_item_selected(a_Item_ID):
+func _on_item_inventory_spawn_item(a_Item_ID):
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
 	new_item.load_item(a_Item_ID)

@@ -79,7 +79,7 @@ columns = 3
 script = ExtResource("2_uci0b")
 capacity = 9
 
-[node name="BodyContainer" type="GridContainer" parent="MechBuilder"]
+[node name="ChestContainer" type="GridContainer" parent="MechBuilder"]
 material = SubResource("ShaderMaterial_6m6hc")
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 1
@@ -137,7 +137,7 @@ columns = 6
 script = ExtResource("5_ikcqh")
 capacity = 18
 
-[node name="LegsContainer" type="GridContainer" parent="MechBuilder"]
+[node name="LegContainer" type="GridContainer" parent="MechBuilder"]
 custom_minimum_size = Vector2(90, 180)
 layout_mode = 1
 anchors_preset = 7
@@ -223,3 +223,4 @@ script = ExtResource("9_xydw1")
 [connection signal="load_frame" from="MechBuilder/Header/FrameChooser" to="MechBuilder" method="_on_frame_chooser_load_frame"]
 [connection signal="load_frame" from="MechBuilder/Header/FrameChooser" to="Stats/MarginContainer/StatsList" method="_on_frame_chooser_load_frame"]
 [connection signal="button_down" from="MechBuilder/Header/UnlockToggle" to="MechBuilder" method="_on_unlock_toggle_button_down"]
+[connection signal="spawn_item" from="PartMenu/MarginContainer/ScrollContainer/ItemInventory" to="MechBuilder" method="_on_item_inventory_spawn_item"]

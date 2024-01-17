@@ -13,7 +13,7 @@ offset_bottom = 648.0
 color = Color(0.0823529, 0.109804, 0.294118, 1)
 script = ExtResource("1_tanpm")
 
-[node name="BodyContainer" type="GridContainer" parent="."]
+[node name="ChestContainer" type="GridContainer" parent="."]
 material = SubResource("ShaderMaterial_6m6hc")
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 1

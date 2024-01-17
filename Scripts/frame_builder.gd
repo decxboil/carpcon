@@ -5,11 +5,11 @@ extends ColorRect
 
 @onready var name_input = $LineEdit
 @onready var head_container = $HeadContainer
-@onready var body_container = $BodyContainer
+@onready var chest_container = $ChestContainer
 @onready var l_arm_container = $LeftArmContainer
 @onready var r_arm_container = $RightArmContainer
-@onready var legs_container = $LegsContainer
-@onready var containers = [body_container, l_arm_container, r_arm_container, head_container, legs_container]
+@onready var leg_container = $LegContainer
+@onready var containers = [chest_container, l_arm_container, r_arm_container, head_container, leg_container]
 
 var grid_array := []
 var current_slot = null
