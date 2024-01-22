@@ -27,9 +27,9 @@ func set_grid_and_icon_data():
 		if item_data[item]["tags"]:
 			if item_data[item]["tags"].contains("ai core"):
 				item_data[item]["icon_path"] = "res://Assets/Item Sprites/Head Parts/AI Core.png"
-		item_data[item]["icon_scale"] = 1.4
+		item_data[item]["icon_scale"] = 1.47
 		if item_data[item]["name"] == "Bulkhead":
-			item_data[item]["icon_scale"] = 0.7
+			item_data[item]["icon_scale"] = 0.73
 
 func create_player():
 	return fisher

@@ -11,7 +11,7 @@ var current_slot = null
 var icon_anchor : Vector2
 
 var grid := []
-var save_path = "res://Data/item_data.json"
+var save_path = "res://Data/item_data.fsh"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

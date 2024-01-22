@@ -3,14 +3,14 @@ extends ColorRect
 @onready var slot_scene = preload("res://Scenes/grid_slot.tscn")
 @onready var item_scene = preload("res://Scenes/item.tscn")
 
-@onready var head_container = $HeadContainer
-@onready var chest_container = $ChestContainer
-@onready var l_arm_container = $LeftArmContainer
-@onready var r_arm_container = $RightArmContainer
-@onready var leg_container = $LegContainer
+@onready var head_container = $ContainerContainer/HeadContainer
+@onready var chest_container = $ContainerContainer/ChestContainer
+@onready var l_arm_container = $ContainerContainer/LeftArmContainer
+@onready var r_arm_container = $ContainerContainer/RightArmContainer
+@onready var leg_container = $ContainerContainer/LegContainer
 @onready var containers = [chest_container, l_arm_container, r_arm_container, head_container, leg_container]
 
-var save_path = "res://Data/frame_data.fsh"
+var save_path = "res://Data/Save Data/"
 
 var grid_array := []
 var item_held = null
@@ -20,8 +20,10 @@ var icon_anchor : Vector2
 enum Modes {EQUIP, PLACE, UNLOCK}
 var mode = Modes.EQUIP
 
-signal item_installed(a_Item)
-signal item_removed(a_Item)
+signal item_installed(item)
+signal item_removed(item)
+
+signal set_gear_ability(frame_data)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,7 +68,7 @@ func _on_slot_mouse_entered(a_Slot):
 		check_slot_availability(current_slot)
 		set_grids.call_deferred(current_slot)
 	if mode == Modes.UNLOCK:
-		check_lock_availability(current_slot)
+		check_lock_availability()
 		set_lock_grids.call_deferred(current_slot)
 	pass
 	
@@ -74,7 +76,7 @@ func _on_slot_mouse_exited():
 	clear_grid()
 	pass
 
-func check_lock_availability(a_Slot):
+func check_lock_availability():
 	pass
 
 func check_slot_availability(a_Slot):
@@ -183,8 +185,12 @@ func toggle_locked():
 	
 	if current_slot.locked:
 		current_slot.unlock()
+	else:
+		if !current_slot.installed_item:
+			current_slot.lock()
 
 func _on_frame_chooser_load_frame(a_Frame):
+	emit_signal("set_gear_ability", a_Frame)
 	for grid in grid_array:
 		grid.lock()
 	for index in a_Frame["unlocks"]:
@@ -200,9 +206,28 @@ func _on_unlock_toggle_button_down():
 		mode = Modes.UNLOCK
 
 func _on_item_inventory_spawn_item(a_Item_ID):
+	if item_held:
+		return
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
 	new_item.load_item(a_Item_ID)
 	new_item.selected = true
 	item_held = new_item
 	mode = Modes.PLACE
+
+func install_item(a_Item_ID, a_Index):
+	var new_item = item_scene.instantiate()
+	grid_array[a_Index].get_parent().add_child(new_item)
+	new_item.load_item(a_Item_ID)
+	
+	for grid in new_item.item_grids:
+		var grid_to_check = a_Index + grid[0] + grid[1] * grid_array[a_Index].get_parent().columns
+		grid_array[a_Index].state = grid_array[grid_to_check].States.TAKEN
+		grid_array[a_Index].installed_item = new_item
+	
+	new_item.snap_to(grid_array[a_Index].global_position)
+	new_item.grid_anchor = grid_array[a_Index]
+	emit_signal("item_installed", new_item)
+
+func _on_button_button_down():
+	install_item("close_sensors_i", 76)

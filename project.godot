@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 DataHandler="*res://Scripts/DataHandler.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

@@ -17,7 +17,7 @@ var icon_anchor : Vector2
 var can_unlock := false
 
 var unlocks := []
-var save_path = "res://Data/frame_data.json"
+var save_path = "res://Data/frame_data.fsh"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

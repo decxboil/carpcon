@@ -1,0 +1,44 @@
+{
+  "first_word": {
+    "name": "The First Word",
+    "flavor_text": "Sh’a Bwoo-Tru",
+    "action_text": "Action Cost: 0AP\r\nBacklash Cost: 1\r\nEffect: Your next Attack Roll or REEL CHECK\r\nis increased by +1d6.",
+    "tags": null
+  },
+  "second_word": {
+    "name": "The Second Word",
+    "flavor_text": "Ghoul G’rul Gu’a-a’al",
+    "action_text": "Action Cost: 1AP\r\nBacklash Cost: 1\r\nEffect: Your next attack gains the Precision\r\nTag.",
+    "tags": null
+  },
+  "third_word": {
+    "name": "The Third Word",
+    "flavor_text": "Aand’ol Haz-yu’el",
+    "action_text": "Action Cost: 1AP\nBacklash Cost: 1\nEffect: MENTAL Attack - Range 8\n(3) Damage.",
+    "tags": "terrifying"
+  },
+  "fourth_word": {
+    "name": "The Fourth Word",
+    "flavor_text": "Wo’l Ney’li-ier",
+    "action_text": "Action Cost: 0AP\r\nBacklash Cost: 1\r\nEffect: Gain the Concealed Condition.",
+    "tags": null
+  },
+  "fifth_word": {
+    "name": "The Fifth Word",
+    "flavor_text": "Ha-alsh Sh’iel ‘Sh’ial",
+    "action_text": "Action Cost: 2 AP\nBacklash Cost: 1\nEffect:MENTAL Attack - Range 8\n(3) Damage.",
+    "tags": "frenzy"
+  },
+  "final_word": {
+    "name": "The Final Word",
+    "flavor_text": "D’a G’on W’e-shom P’i-esh A’l-Z’gun",
+    "action_text": "Action Cost: 0 AP\r\nBacklash Cost: This word causes you to lose\r\nall of your current Marbles instead.\r\nEffect: You may only learn this Deep-Word if\r\nyou have already learned five other\r\nDeep-Words. You may only voice this word\r\nduring the final (10th) Fishing-Trip.\r\nVoicing this Word has no effect, but if you roll a\r\nresult of 12 on the affliction table as a result of\r\nlosing all Marbles by Voicing this word you\r\nimmediately become one with the Deep,\r\nbecoming fluent in its tongue. You gain the\r\nfollowing Action for the rest of the Fishing Trip\r\nand effects that would reduce your Marbles no\r\nlonger reduce your Marbles.",
+    "tags": null
+  },
+  "fluent_deep-tongue": {
+    "name": "Fluent Deep-Tongue",
+    "flavor_text": null,
+    "action_text": "2AP - 1/turn\nMENTAL Attack- Range 10 - (5) Damage\r\nEffect: If this attack would destroy a Biological\r\nFish it is caught instead.\r\nAfter the Fishing Trip is concluded your Marble\r\nstat is reduced to 0. You become one with the\r\nDeep. Truly one of its denizens.",
+    "tags": "crushing, devastating"
+  }
+}

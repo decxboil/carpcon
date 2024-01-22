@@ -1,6 +1,6 @@
 extends OptionButton
 
-var save_path = "res://Data/frame_data.json"
+var save_path = "res://Data/frame_data.fsh"
 
 var frame_data = {}
 signal load_frame(frame)

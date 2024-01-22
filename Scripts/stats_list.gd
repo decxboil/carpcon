@@ -12,7 +12,8 @@ var stats_dict := {"ap": 0,
 		"sensor": 0,
 		"speed": 0,
 		"weight": 0,
-		"weight_cap": 0}
+		"weight_cap": 0,
+		"ballast": 0}
 var label_dict := {}
 
 # Called when the node enters the scene tree for the first time.
@@ -39,6 +40,7 @@ func _on_mech_builder_item_removed(a_Item):
 
 func _on_frame_chooser_load_frame(a_Frame):
 	a_Frame["weight"] = 0
+	a_Frame["ballast"] = 0
 	for stat in stats_dict:
 		if stat == "unlocks":
 			continue
