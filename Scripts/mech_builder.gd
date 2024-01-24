@@ -205,7 +205,7 @@ func _on_unlock_toggle_button_down():
 	else:
 		mode = Modes.UNLOCK
 
-func _on_item_inventory_spawn_item(a_Item_ID):
+func on_item_inventory_spawn_item(a_Item_ID):
 	if item_held:
 		return
 	var new_item = item_scene.instantiate()

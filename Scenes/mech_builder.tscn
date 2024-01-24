@@ -1,17 +1,17 @@
 [gd_scene load_steps=14 format=3 uid="uid://d4c1rk3pk616a"]
 
 [ext_resource type="Script" path="res://Scripts/mech_builder.gd" id="1_e2epo"]
-[ext_resource type="Script" path="res://Scenes/tab_bar.gd" id="1_mly41"]
+[ext_resource type="Script" path="res://Scripts/tab_bar.gd" id="2_8u48r"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/HeadContainer.gd" id="2_uci0b"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/BodyContainer.gd" id="3_3sunk"]
-[ext_resource type="PackedScene" path="res://Scenes/internals_grid.tscn" id="3_ojnrw"]
+[ext_resource type="Script" path="res://Scripts/frame_selector.gd" id="4_kaslm"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/LeftArmContainer.gd" id="4_msdhg"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/RightArmContainer.gd" id="5_ikcqh"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/LegsContainer.gd" id="6_r7v1r"]
-[ext_resource type="Script" path="res://Scripts/frame_chooser.gd" id="7_q3quo"]
 [ext_resource type="Script" path="res://Scripts/stats_list.gd" id="9_34ety"]
 [ext_resource type="Script" path="res://Scripts/gear_ability.gd" id="9_dxgnc"]
 [ext_resource type="Script" path="res://Scripts/item_inventory.gd" id="9_xydw1"]
+[ext_resource type="Script" path="res://Scripts/background_selector.gd" id="11_enoln"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6m6hc"]
 
@@ -45,23 +45,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 script = ExtResource("9_xydw1")
 
 [node name="TabBar" type="TabBar" parent="HBoxContainer/HBoxContainer/PartMenu/ItemInventory"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-script = ExtResource("1_mly41")
+script = ExtResource("2_8u48r")
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/HBoxContainer/PartMenu/ItemInventory"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/HBoxContainer/PartMenu/ItemInventory/MarginContainer"]
-layout_mode = 2
-
-[node name="InternalsGrid" parent="HBoxContainer/HBoxContainer/PartMenu/ItemInventory/MarginContainer/ScrollContainer" instance=ExtResource("3_ojnrw")]
-layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -101,12 +96,12 @@ layout_mode = 2
 text = "  Gear:
 "
 
-[node name="FrameChooser" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer"]
+[node name="FrameSelector" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-script = ExtResource("7_q3quo")
+script = ExtResource("4_kaslm")
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header"]
 custom_minimum_size = Vector2(300, 20)
@@ -282,9 +277,10 @@ layout_mode = 2
 text = "Background:
 "
 
-[node name="OptionButton" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="BackgroundSelector" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+script = ExtResource("11_enoln")
 
 [node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
@@ -313,11 +309,12 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [connection signal="tab_changed" from="HBoxContainer/HBoxContainer/PartMenu/ItemInventory/TabBar" to="HBoxContainer/HBoxContainer/PartMenu/ItemInventory/TabBar" method="_on_tab_changed"]
+[connection signal="tab_chosen" from="HBoxContainer/HBoxContainer/PartMenu/ItemInventory/TabBar" to="HBoxContainer/HBoxContainer/PartMenu/ItemInventory" method="_on_tab_bar_tab_chosen"]
 [connection signal="item_installed" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_mech_builder_item_installed"]
 [connection signal="item_removed" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_mech_builder_item_removed"]
 [connection signal="set_gear_ability" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer/GearAbility" method="_on_mech_builder_set_gear_ability"]
-[connection signal="item_selected" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameChooser" to="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameChooser" method="_on_item_selected"]
-[connection signal="load_frame" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameChooser" to="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_frame_chooser_load_frame"]
-[connection signal="load_frame" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameChooser" to="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_frame_chooser_load_frame"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameSelector" to="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameSelector" method="_on_item_selected"]
+[connection signal="load_frame" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameSelector" to="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_frame_chooser_load_frame"]
+[connection signal="load_frame" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/VBoxContainer/FrameSelector" to="HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_frame_chooser_load_frame"]
 [connection signal="button_down" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/Button" to="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_button_button_down"]
 [connection signal="button_down" from="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/Header/UnlockToggle" to="HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_unlock_toggle_button_down"]

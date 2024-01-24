@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4k16jnpyicfs"]
+
+[ext_resource type="Script" path="res://Scripts/tab_bar.gd" id="1_qtv8p"]
+
+[node name="TabBar" type="TabBar"]
+custom_minimum_size = Vector2(0, 50)
+script = ExtResource("1_qtv8p")
+
+[connection signal="tab_changed" from="." to="." method="_on_tab_changed"]

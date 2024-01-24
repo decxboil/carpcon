@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://cebe7ww2lhsxa"]
+[gd_scene load_steps=2 format=3 uid="uid://b7i07v1myf708"]
 
-[node name="InternalsGrid" type="GridContainer"]
+[ext_resource type="Script" path="res://Scripts/internals_grid.gd" id="1_ve38o"]
+
+[node name="GridContainer" type="GridContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 1
 theme_override_constants/v_separation = 1
 columns = 2
+script = ExtResource("1_ve38o")
