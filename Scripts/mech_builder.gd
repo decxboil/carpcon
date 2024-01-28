@@ -10,19 +10,27 @@ extends ColorRect
 @onready var leg_container = $ContainerContainer/LegContainer
 @onready var containers = [chest_container, l_arm_container, r_arm_container, head_container, leg_container]
 
+@onready var stats = $"../VBoxContainer/Stats/StatsList"
+
 var save_path = "res://Data/Save Data/"
+var screenshot_path = "res://Screenshots/"
 
 var grid_array := []
 var item_held = null
 var current_slot = null
 var can_place := false
+var can_lock := false
 var icon_anchor : Vector2
 enum Modes {EQUIP, PLACE, UNLOCK}
 var mode = Modes.EQUIP
 
+var fisher
+
 signal item_installed(item)
 signal item_removed(item)
 
+var default_unlocks := []
+signal incrememnt_lock_tally(change)
 signal set_gear_ability(frame_data)
 
 # Called when the node enters the scene tree for the first time.
@@ -30,6 +38,8 @@ func _ready():
 	for container in containers:
 		for i in container.capacity:
 			create_slot(container)
+	
+	fisher = DataHandler.create_player()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -68,16 +78,31 @@ func _on_slot_mouse_entered(a_Slot):
 		check_slot_availability(current_slot)
 		set_grids.call_deferred(current_slot)
 	if mode == Modes.UNLOCK:
-		check_lock_availability()
+		check_lock_availability(current_slot)
 		set_lock_grids.call_deferred(current_slot)
 	pass
 	
 func _on_slot_mouse_exited():
-	clear_grid()
+	if mode == Modes.UNLOCK:
+		current_slot.set_color(current_slot.States.TAKEN)
+		for grid in grid_array:
+			if not default_unlocks.has(grid.slot_ID):
+				grid.set_color(grid.States.DEFAULT)
+	else:
+		clear_grid()
 	pass
 
-func check_lock_availability():
-	pass
+func check_lock_availability(a_Slot):
+	if not a_Slot.locked and default_unlocks.has(a_Slot.slot_ID):
+		can_lock = false
+		return
+	if a_Slot.installed_item:
+		can_lock = false
+		return
+	if a_Slot.locked and not stats.unlocks_remaining():
+		can_lock = false
+		return
+	can_lock = true
 
 func check_slot_availability(a_Slot):
 	var column_count = a_Slot.get_parent().columns
@@ -102,7 +127,10 @@ func check_slot_availability(a_Slot):
 		can_place = true
 
 func set_lock_grids(a_Slot):
-	grid_array[a_Slot.slot_ID].set_color(grid_array[a_Slot.slot_ID].States.FREE)
+	if can_lock:
+		grid_array[a_Slot.slot_ID].set_color(grid_array[a_Slot.slot_ID].States.FREE)
+	else: 
+		grid_array[a_Slot.slot_ID].set_color(grid_array[a_Slot.slot_ID].States.TAKEN)
 
 func set_grids(a_Slot):
 	var column_count = a_Slot.get_parent().columns
@@ -180,20 +208,27 @@ func drop_item():
 	mode = Modes.EQUIP
 
 func toggle_locked():
-	if not current_slot:
+	if not current_slot or not can_lock:
 		return
 	
 	if current_slot.locked:
 		current_slot.unlock()
+		emit_signal("incrememnt_lock_tally", 1)
 	else:
 		if !current_slot.installed_item:
 			current_slot.lock()
+			emit_signal("incrememnt_lock_tally", -1)
+	
+	check_lock_availability(current_slot)
+	set_lock_grids.call_deferred(current_slot)
 
 func _on_frame_chooser_load_frame(a_Frame):
 	emit_signal("set_gear_ability", a_Frame)
+	default_unlocks = PackedInt32Array(a_Frame["default_unlocks"])
+	
 	for grid in grid_array:
 		grid.lock()
-	for index in a_Frame["unlocks"]:
+	for index in a_Frame["default_unlocks"]:
 		grid_array[index].unlock()
 
 func _on_unlock_toggle_button_down():
@@ -201,9 +236,13 @@ func _on_unlock_toggle_button_down():
 		drop_item()
 	
 	if mode == Modes.UNLOCK:
+		clear_grid()
 		mode = Modes.EQUIP
 	else:
 		mode = Modes.UNLOCK
+		for grid in grid_array:
+			if default_unlocks.has(grid.slot_ID):
+				grid.set_color(grid.States.TAKEN)
 
 func on_item_inventory_spawn_item(a_Item_ID):
 	if item_held:
@@ -230,4 +269,15 @@ func install_item(a_Item_ID, a_Index):
 	emit_signal("item_installed", new_item)
 
 func _on_button_button_down():
-	install_item("close_sensors_i", 76)
+	var image = get_viewport().get_texture().get_image()
+	var _time = Time.get_datetime_string_from_system()
+	var filename = "user://Screenshot.png"
+	
+	image.save_png(filename)
+	
+	var path
+	if OS.has_feature("editor"):
+		path = ProjectSettings.globalize_path("user://")
+	else:
+		path = OS.get_executable_path().get_base_dir().path_join("user://")
+	OS.shell_show_in_file_manager(path, true)

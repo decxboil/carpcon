@@ -1,0 +1,68 @@
+{
+  "1": {
+    "unlocks": 0,
+    "developments": 0,
+    "weight_cap": 0,
+    "shore_leave_stat": 0
+  },
+  "2": {
+    "unlocks": 3,
+    "developments": 1,
+    "weight_cap": 0,
+    "shore_leave_stat": 0
+  },
+  "3": {
+    "unlocks": 6,
+    "developments": 1,
+    "weight_cap": 1,
+    "shore_leave_stat": 1
+  },
+  "4": {
+    "unlocks": 9,
+    "developments": 2,
+    "weight_cap": 1,
+    "shore_leave_stat": 1
+  },
+  "5": {
+    "unlocks": 12,
+    "developments": 2,
+    "weight_cap": 2,
+    "shore_leave_stat": 2
+  },
+  "6": {
+    "unlocks": 15,
+    "developments": 3,
+    "weight_cap": 2,
+    "shore_leave_stat": 2
+  },
+  "7": {
+    "unlocks": 18,
+    "developments": 3,
+    "weight_cap": 3,
+    "shore_leave_stat": 3
+  },
+  "8": {
+    "unlocks": 21,
+    "developments": 4,
+    "weight_cap": 3,
+    "shore_leave_stat": 3
+  },
+  "9": {
+    "unlocks": 24,
+    "developments": 4,
+    "weight_cap": 4,
+    "shore_leave_stat": 4
+  },
+  "10": {
+    "unlocks": 27,
+    "developments": 5,
+    "weight_cap": 4,
+    "shore_leave_stat": 4
+  },
+  "11": {
+    "unlocks": 27,
+    "developments": 5,
+    "weight_cap": 4,
+    "shore_leave_stat": 4
+  }
+}

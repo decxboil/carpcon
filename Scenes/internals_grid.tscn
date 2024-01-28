@@ -5,7 +5,7 @@
 [node name="GridContainer" type="GridContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 1
+theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 1
 columns = 2
 script = ExtResource("1_ve38o")

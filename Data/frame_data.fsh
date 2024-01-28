@@ -2,14 +2,14 @@
     "anemone": {
         "ap": 2,
         "close": 5,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 12,
         "far": 5,
         "power": 3,
-        "repair": 1,
+        "repair_kits": 1,
         "sensor": 5,
         "speed": 4,
-        "unlocks": [
+        "default_unlocks": [
             0,
             1,
             4,
@@ -34,21 +34,23 @@
             94,
             97
         ],
+        "weight": 0,
         "weight_cap": 12,
+        "ballast": 0,
         "gear_ability_name": "Soothing",
         "gear_ability": "When you voice a Deep-Word you may roll 1d6. On a 4+ it does not cost Backlash."
     },
     "angler": {
         "ap": 2,
         "close": 4,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 12,
         "far": 7,
         "power": 2,
-        "repair": 1,
+        "repair_kits": 1,
         "sensor": 3,
         "speed": 5,
-        "unlocks": [
+        "default_unlocks": [
             0,
             1,
             4,
@@ -72,21 +74,23 @@
             93,
             95
         ],
+        "weight": 0,
         "weight_cap": 10,
+        "ballast": 0,
         "gear_ability_name": "Sniper",
         "gear_ability": "1/turn when you hit with a FAR attack while in a Zone of Cover you may apply the Dazed Condition to the target."
     },
     "buccaneer": {
         "ap": 3,
         "close": 6,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 10,
         "far": 4,
         "power": 5,
-        "repair": 2,
+        "repair_kits": 2,
         "sensor": 3,
         "speed": 2,
-        "unlocks": [
+        "default_unlocks": [
             6,
             7,
             10,
@@ -111,21 +115,23 @@
             93,
             95
         ],
+        "weight": 0,
         "weight_cap": 14,
+        "ballast": 0,
         "gear_ability_name": "Brute",
         "gear_ability": "Your Bash Action gains the Crushing Tag."
     },
     "deringer": {
         "ap": 2,
         "close": 5,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 12,
         "far": 5,
         "power": 2,
-        "repair": 2,
+        "repair_kits": 2,
         "sensor": 5,
         "speed": 4,
-        "unlocks": [
+        "default_unlocks": [
             7,
             10,
             13,
@@ -152,21 +158,23 @@
             88,
             91
         ],
+        "weight": 0,
         "weight_cap": 12,
+        "ballast": 0,
         "gear_ability_name": "Ammo Feeds",
         "gear_ability": "1/turn when you Engage an Internal with the Rapid Fire Tag its AP cost is reduced by 1 the next time you Engage it this turn."
     },
     "jolly_roger": {
         "ap": 3,
         "close": 5,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 10,
         "far": 5,
         "power": 3,
-        "repair": 2,
+        "repair_kits": 2,
         "sensor": 2,
         "speed": 2,
-        "unlocks": [
+        "default_unlocks": [
             7,
             8,
             9,
@@ -195,21 +203,23 @@
             79,
             88
         ],
+        "weight": 0,
         "weight_cap": 15,
+        "ballast": 0,
         "gear_ability_name": "Massive",
         "gear_ability": "Your Token on the battlefield is 2x2 spaces large. Your Bash action deals [4] damage instead."
     },
     "lamprey": {
         "ap": 2,
         "close": 7,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 13,
         "far": 4,
         "power": 2,
-        "repair": 2,
+        "repair_kits": 2,
         "sensor": 2,
         "speed": 5,
-        "unlocks": [
+        "default_unlocks": [
             0,
             1,
             4,
@@ -231,21 +241,23 @@
             91,
             92
         ],
+        "weight": 0,
         "weight_cap": 12,
+        "ballast": 0,
         "gear_ability_name": "Stalker",
         "gear_ability": "If you start your turn in a zone of Cover your next CLOSE attack this turn gains the Precision tag."
     },
     "lonestar": {
         "ap": 2,
         "close": 5,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 12,
         "far": 5,
         "power": 4,
-        "repair": 2,
+        "repair_kits": 2,
         "sensor": 3,
         "speed": 4,
-        "unlocks": [
+        "default_unlocks": [
             7,
             8,
             10,
@@ -272,21 +284,23 @@
             93,
             95
         ],
+        "weight": 0,
         "weight_cap": 12,
+        "ballast": 0,
         "gear_ability_name": "Jury Rigged",
         "gear_ability": "When you perform a Quick Fix you roll 2d6 and keep the higher one."
     },
     "mariner": {
         "ap": 3,
         "close": 5,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 12,
         "far": 4,
         "power": 4,
-        "repair": 2,
+        "repair_kits": 2,
         "sensor": 4,
         "speed": 3,
-        "unlocks": [
+        "default_unlocks": [
             7,
             8,
             13,
@@ -309,21 +323,23 @@
             88,
             91
         ],
+        "weight": 0,
         "weight_cap": 12,
+        "ballast": 0,
         "gear_ability_name": "Knockout Blow",
         "gear_ability": "Your Bash Actions gains the Tranq 2 Tag"
     },
     "parallel": {
         "ap": 2,
         "close": 5,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 10,
         "far": 5,
         "power": 2,
-        "repair": 1,
+        "repair_kits": 1,
         "sensor": 4,
         "speed": 3,
-        "unlocks": [
+        "default_unlocks": [
             6,
             11,
             12,
@@ -346,21 +362,23 @@
             90,
             92
         ],
+        "weight": 0,
         "weight_cap": 13,
+        "ballast": 0,
         "gear_ability_name": "Perfect Symmetry",
         "gear_ability": "If each Internal you install is installed in multiples of 2 you may activate a second reactor each turn."
     },
     "pridemoore": {
         "ap": 2,
         "close": 4,
-        "core": 2,
+        "core_integrity": 2,
         "evade": 12,
         "far": 6,
         "power": 2,
-        "repair": 2,
+        "repair_kits": 2,
         "sensor": 5,
         "speed": 5,
-        "unlocks": [
+        "default_unlocks": [
             13,
             14,
             16,
@@ -383,21 +401,23 @@
             90,
             92
         ],
+        "weight": 0,
         "weight_cap": 11,
+        "ballast": 0,
         "gear_ability_name": "Sonar Assembly",
         "gear_ability": "1/Turn, when you Scan, you may Scan an additional target."
     },
     "quadrilateral": {
         "ap": 2,
         "close": 5,
-        "core": 2,
+        "core_integrity": 2,
         "evade": 12,
         "far": 4,
         "power": 2,
-        "repair": 1,
+        "repair_kits": 1,
         "sensor": 3,
         "speed": 4,
-        "unlocks": [
+        "default_unlocks": [
             6,
             7,
             10,
@@ -421,21 +441,23 @@
             94,
             97
         ],
+        "weight": 0,
         "weight_cap": 11,
+        "ballast": 0,
         "gear_ability_name": "Perfect Balance",
         "gear_ability": "If each of your sections have the same number of Internals installed your Weight Class decreases by one."
     },
     "rhombus": {
         "ap": 2,
         "close": 5,
-        "core": 3,
+        "core_integrity": 3,
         "evade": 11,
         "far": 5,
         "power": 2,
-        "repair": 1,
+        "repair_kits": 1,
         "sensor": 3,
         "speed": 3,
-        "unlocks": [
+        "default_unlocks": [
             4,
             5,
             10,
@@ -461,7 +483,9 @@
             96,
             97
         ],
+        "weight": 0,
         "weight_cap": 12,
+        "ballast": 0,
         "gear_ability_name": "Perfect Alignment",
         "gear_ability": "If none of your Internals are adjacent to each other you gain +2 to CLOSE and FAR."
     }

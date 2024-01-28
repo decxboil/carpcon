@@ -39,10 +39,8 @@ var fisher = {
 	"callsign": "Genie",
 	"level": 1,
 	"background": "freefisher",
-	"talents": {
-		"talent_name": 1,
-	},
-	"mech_data": {
+	"developments": [],
+	"gear_data": {
 		"frame": {
 			
 		},

@@ -18,7 +18,7 @@ func set_color(a_state = States.DEFAULT):
 		States.DEFAULT:
 			filter.color = Color(Color.WHITE, 0.0)
 		States.TAKEN:
-			filter.color = Color(Color.RED, 0.3)
+			filter.color = Color(Color.DARK_ORANGE, 0.3)
 		States.FREE:
 			filter.color = Color(Color.GREEN, 0.3)
 

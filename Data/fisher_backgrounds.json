@@ -1,6 +1,6 @@
 {
   "coastal": {
-    "name": "Coastal",
+    "background": "Coastal",
     "marbles": 5,
     "mental": 5,
     "willpower": 12,
@@ -8,7 +8,7 @@
     "description": "Coastals are those that have spent most of their lives in the coastal city states of Halcyon. Sheltered and protected from both the dangers of the Wastes and the vast Oceans. Coastal individuals live relatively normal lives yet some of them follow the calling of becoming a Fisher. Either to provide for their communities or because they seek the thrill and adventure."
   },
   "nomad": {
-    "name": "Nomad",
+    "background": "Nomad",
     "marbles": 6,
     "mental": 4,
     "willpower": 13,
@@ -16,7 +16,7 @@
     "description": "Nomads are individuals that travel the wastes between the city states. They usually visit the cities to procure supplies, sometimes trading between them. Never staying in one place for too long, Nomads are hardy individuals. It is rare for a Nomad to become a Fisher but it does happen from time to time, their sturdy mindset a great boon against the dangers of the ocean."
   },
   "deep-touched": {
-    "name": "Deep-Touched",
+    "background": "Deep-Touched",
     "marbles": 6,
     "mental": 7,
     "willpower": 10,
@@ -24,7 +24,7 @@
     "description": "Deep-Touched are rare but make up a disproportional amount of Fishers. Innately drawn to the ocean and its creatures they often seek to follow the call that is luring them into the depths. Resilient against the horrors the ocean has to offer they may not be as adept at piloting their Gears as Fishers from different backgrounds."
   },
   "military": {
-    "name": "Military",
+    "background": "Military",
     "marbles": 5,
     "mental": 4,
     "willpower": 12,
@@ -32,7 +32,7 @@
     "description": "Most city states employ a small military force to keep itself protected. These mentally sturdy individuals often receive Gear-pilot training. Fishers with a military background are common. Capable when fighting and catching fish they can be a valuable asset to a city state even after their active military service."
   },
   "freefisher": {
-    "name": "Freefisher",
+    "background": "Freefisher",
     "marbles": 4,
     "mental": 5,
     "willpower": 11,
@@ -40,7 +40,7 @@
     "description": "Freefishers are, in a word, pirates. They hang around the rougher city-states and ports, seeking mostly to ambush and rob other Fishers and traders. Freefishers often heavily modify their Gears, the tools of their trade, but generally have an extremely tenuous grasp on reality."
   },
   "researcher": {
-    "name": "Researcher",
+    "background": "Researcher",
     "marbles": 5,
     "mental": 4,
     "willpower": 14,

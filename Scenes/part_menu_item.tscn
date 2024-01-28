@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/part_menu_item.gd" id="1_hhkp4"]
 
 [node name="PartMenuItem" type="ColorRect"]
-custom_minimum_size = Vector2(120, 75)
+custom_minimum_size = Vector2(130, 75)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.215686, 0.215686, 0.215686, 1)

@@ -13,9 +13,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if selected:
-		global_position = lerp(global_position, get_global_mouse_position() - icon.size/2, 60 * delta)
+		global_position = lerp(global_position, get_global_mouse_position(), 60 * delta)
 
 func load_item(a_itemID : String):
+	global_position = get_global_mouse_position()
+	
 	item_data = DataHandler.item_data[a_itemID]
 	
 	icon.texture = load(item_data["icon_path"])
@@ -30,6 +32,11 @@ func load_item(a_itemID : String):
 func snap_to(destination: Vector2):
 	var tween = get_tree().create_tween()
 	
-	var snap_adjustment = icon.size/128
-	tween.tween_property(self, "global_position", destination + snap_adjustment, 0.01).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "global_position", destination, 0.01).set_trans(Tween.TRANS_SINE)
 	selected = false
+
+func _on_icon_mouse_entered():
+	pass
+
+func _on_icon_mouse_exited():
+	pass
