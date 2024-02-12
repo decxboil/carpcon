@@ -11,7 +11,11 @@ func _ready():
 		printerr("file not found")
 		return
 	var file = FileAccess.open(save_path, FileAccess.READ)
-	frame_data = JSON.parse_string(file.get_as_text())
+	var temp_data = JSON.parse_string(file.get_as_text())
+	if temp_data:
+		frame_data = temp_data
+	else: 
+		return
 	file.close()
 	
 	for frame in frame_data:

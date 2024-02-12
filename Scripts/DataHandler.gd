@@ -23,8 +23,13 @@ func load_data(a_path):
 		printerr("file not found")
 		return
 	var file = FileAccess.open(a_path, FileAccess.READ)
-	item_data = JSON.parse_string(file.get_as_text())
+	var temp_data = JSON.parse_string(file.get_as_text())
+	if temp_data:
+		item_data = temp_data
 	file.close()
+
+func get_gear_template():
+	return gear_data_template.duplicate(true)
 
 func set_grid_and_icon_data():
 	for item in item_data.keys():
@@ -33,10 +38,7 @@ func set_grid_and_icon_data():
 			temp_grid_array.push_back(point.split(","))
 		item_grid_data[item] = temp_grid_array
 		item_data[item]["icon_path"] = "res://Assets/Item Sprites/" + item_data[item]["name"] + ".png"
-		item_data[item]["icon_scale"] = 1.47
 
-func get_gear_template():
-	return gear_data_template.duplicate()
-
-func import_file(file):
-	pass
+func reload_items():
+	load_data(item_data_path)
+	set_grid_and_icon_data()

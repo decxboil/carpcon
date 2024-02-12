@@ -11,7 +11,11 @@ func _ready():
 		printerr("file not found")
 		return
 	var file = FileAccess.open(path, FileAccess.READ)
-	level_data = JSON.parse_string(file.get_as_text())
+	var temp_data = JSON.parse_string(file.get_as_text())
+	if temp_data:
+		level_data = temp_data
+	else: 
+		return
 	file.close()
 
 func _on_value_changed(a_Value):

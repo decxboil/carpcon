@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/item_inventory.gd" id="9_xydw1"]
 [ext_resource type="Script" path="res://Scripts/background_selector.gd" id="11_enoln"]
 [ext_resource type="Script" path="res://Scripts/back_button.gd" id="13_ifahj"]
-[ext_resource type="Script" path="res://Scenes/callsign_input.gd" id="15_r861y"]
+[ext_resource type="Script" path="res://Scripts/callsign_input.gd" id="15_aojyd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6m6hc"]
 
@@ -154,19 +154,15 @@ text = "Level:
 layout_mode = 2
 size_flags_vertical = 3
 min_value = 1.0
-max_value = 11.0
+max_value = 10.0
 value = 1.0
 custom_arrow_step = 1.0
 script = ExtResource("5_ce1ha")
 
-[node name="Control" type="Control" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-
 [node name="SaveOptionsMenu" type="MenuButton" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 size_flags_vertical = 4
 text = "Save/Load"
 flat = false
@@ -181,17 +177,32 @@ file_mode = 0
 access = 1
 root_subfolder = "Saves"
 
-[node name="ResetButton" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
+[node name="InternalsResetButton" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 2
 size_flags_vertical = 4
 text = "Reset Internals"
+
+[node name="ResetSpacer" type="Control" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="HardpointsResetButton" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Reset Hardpoints"
+
+[node name="ResetSpacer2" type="Control" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
 
 [node name="UnlockToggle" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 2
 size_flags_vertical = 4
 text = "Unlock
 Hardpoints
@@ -546,7 +557,7 @@ text = "Callsign:"
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-script = ExtResource("15_r861y")
+script = ExtResource("15_aojyd")
 
 [node name="Stats Spacer" type="Control" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
@@ -630,7 +641,8 @@ color = Color(0.215686, 0.215686, 0.215686, 1)
 [connection signal="new_gear_pressed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_save_options_menu_new_gear_pressed"]
 [connection signal="new_gear_pressed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/LevelSelectContainer/LevelSelector" method="_on_save_options_menu_new_gear_pressed"]
 [connection signal="new_gear_pressed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/CallsignInputContainer/CallsignInput" method="_on_save_options_menu_new_gear_pressed"]
-[connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/ResetButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_reset_button_button_down"]
+[connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/InternalsResetButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_internals_reset_button_button_down"]
+[connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/HardpointsResetButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_hardpoints_reset_button_button_down"]
 [connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/UnlockToggle" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_unlock_toggle_button_down"]
 [connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/BackButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/BackButton" method="_on_button_down"]
 [connection signal="toggled" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/UnlocksOverrideToggle/UnlocksCheckButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_unlocks_check_button_toggled"]

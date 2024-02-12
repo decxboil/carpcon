@@ -10,7 +10,7 @@
     "unlocks": 3,
     "maneuvers": 1,
     "developments": 0,
-    "weight_cap": 2,
+    "weight_cap": 1,
     "shore_leave_stat": 0
   },
   "3": {
@@ -24,7 +24,7 @@
     "unlocks": 9,
     "maneuvers": 2,
     "developments": 1,
-    "weight_cap": 4,
+    "weight_cap": 3,
     "shore_leave_stat": 1
   },
   "5": {
@@ -38,7 +38,7 @@
     "unlocks": 15,
     "maneuvers": 3,
     "developments": 2,
-    "weight_cap": 6,
+    "weight_cap": 5,
     "shore_leave_stat": 2
   },
   "7": {
@@ -52,7 +52,7 @@
     "unlocks": 21,
     "maneuvers": 4,
     "developments": 3,
-    "weight_cap": 8,
+    "weight_cap": 7,
     "shore_leave_stat": 3
   },
   "9": {
@@ -66,14 +66,7 @@
     "unlocks": 27,
     "maneuvers": 4,
     "developments": 4,
-    "weight_cap": 10,
-    "shore_leave_stat": 4
-  },
-  "11": {
-    "unlocks": 27,
-    "maneuvers": 4,
-    "developments": 4,
-    "weight_cap": 10,
+    "weight_cap": 9,
     "shore_leave_stat": 4
   }
 }

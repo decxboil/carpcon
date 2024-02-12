@@ -21,8 +21,6 @@ func load_item(a_itemID : String):
 	item_data = DataHandler.item_data[a_itemID]
 	
 	icon.texture = load(item_data["icon_path"])
-	icon.scale.x = item_data["icon_scale"]
-	icon.scale.y = item_data["icon_scale"]
 	for grid in DataHandler.item_grid_data[a_itemID]:
 		var converter_array := []
 		for i in grid:

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkiv4ctslv22q"]
+
+[ext_resource type="Script" path="res://Scripts/file_dialog.gd" id="1_xriw7"]
+
+[node name="FileDialog" type="FileDialog"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(1000, 700)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+script = ExtResource("1_xriw7")
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+title = "Error"
+initial_position = 1
+dialog_text = "Invalid file"
+
+[node name="SuccessDialog" type="AcceptDialog" parent="."]
+title = "Success"
+initial_position = 2
+dialog_text = "Import completed"
+
+[connection signal="file_selected" from="." to="." method="_on_file_selected"]

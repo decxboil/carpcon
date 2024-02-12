@@ -11,7 +11,7 @@ func _ready():
 		if !DirAccess.dir_exists_absolute(directory):
 			DirAccess.make_dir_recursive_absolute(directory)
 	
-	if !DirAccess.get_files_at("user://LocalData").is_empty():
+	if not DirAccess.get_files_at("user://LocalData").is_empty():
 		return
 	
 	dir.list_dir_begin()
@@ -20,8 +20,7 @@ func _ready():
 		if dir.current_is_dir():
 			continue
 		var file = FileAccess.open("user://LocalData".path_join(file_name), FileAccess.WRITE)
-		var path = data_dir.path_join(file_name)
-		var data = FileAccess.open(path, FileAccess.READ).get_as_text()
+		var data = FileAccess.open(data_dir.path_join(file_name), FileAccess.READ).get_as_text()
 		file.store_string(data)
 		file.close()
 		file_name = dir.get_next()

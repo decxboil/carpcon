@@ -20,7 +20,6 @@ func _ready():
 		margin_container.add_child(new_scroll)
 		new_grid.spawn_item.connect(mech_builder.on_item_inventory_spawn_item)
 		section_list[part] = new_grid
-		new_scroll.visible = false
 	
 	var item_array := []
 	for item in DataHandler.item_data:

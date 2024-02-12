@@ -34,12 +34,10 @@ signal new_save_loaded(user_data)
 var gear_data = DataHandler.get_gear_template()
 var internals := {}
 var current_frame := ""
-var unlocks := []
+var current_background := ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	unlocks = gear_data["unlocks"]
-	
 	for container in containers:
 		for i in container.capacity:
 			create_slot(container)
@@ -211,6 +209,8 @@ func pickup_item():
 	mode = Modes.PLACE
 
 func drop_item():
+	if not item_held:
+		return
 	item_held.queue_free()
 	item_held = null
 	mode = Modes.EQUIP
@@ -221,12 +221,12 @@ func toggle_locked():
 	
 	if current_slot.locked:
 		current_slot.unlock()
-		unlocks.push_back(current_slot.slot_ID)
+		gear_data["unlocks"].push_back(current_slot.slot_ID)
 		emit_signal("incrememnt_lock_tally", 1)
 	else:
 		if !current_slot.installed_item:
 			current_slot.lock()
-			unlocks.erase(current_slot.slot_ID)
+			gear_data["unlocks"].erase(current_slot.slot_ID)
 			emit_signal("incrememnt_lock_tally", -1)
 	
 	check_lock_availability(current_slot)
@@ -274,6 +274,8 @@ func install_item(a_Item_ID, a_Index):
 	grid_array[a_Index].get_parent().add_child(new_item)
 	new_item.load_item(a_Item_ID.to_snake_case())
 	
+	new_item.grid_anchor = grid_array[a_Index]
+	
 	for grid in new_item.item_grids:
 		if grid[1] < icon_anchor.x: icon_anchor.x = grid[1]
 		if grid[0] < icon_anchor.y: icon_anchor.y = grid[0]
@@ -283,7 +285,6 @@ func install_item(a_Item_ID, a_Index):
 	
 	var calculated_grid_id = a_Index + icon_anchor.x * column_count + icon_anchor.y
 	new_item.snap_to(grid_array[calculated_grid_id].global_position)
-	new_item.grid_anchor = grid_array[a_Index]
 	internals[a_Index] = new_item
 	emit_signal("item_installed", new_item)
 
@@ -297,8 +298,16 @@ func internals_reset():
 		internals[slot].queue_free()
 	internals.clear()
 
-func _on_reset_button_button_down():
+func _on_internals_reset_button_button_down():
 	internals_reset()
+
+func _on_hardpoints_reset_button_button_down():
+	internals_reset()
+	for grid in grid_array:
+		grid.lock()
+	for index in default_unlocks:
+		grid_array[index].unlock()
+	emit_signal("reset_lock_tally")
 
 func _on_save_options_menu_new_gear_pressed():
 	for grid in grid_array:
@@ -308,13 +317,14 @@ func _on_save_options_menu_new_gear_pressed():
 	emit_signal("reset_lock_tally")
 	
 	internals_reset()
+	gear_data = DataHandler.get_gear_template()
 
 func get_user_data_string():
 	for grid in internals.keys():
 		gear_data["internals"][str(grid)] = internals[grid].item_data["name"].to_snake_case()
 	
 	gear_data["frame"] = current_frame
-	
+	gear_data["background"] = current_background
 	gear_data["callsign"] = callsign_input.text
 	
 	return str(gear_data)
@@ -323,17 +333,22 @@ func _on_level_selector_change_level(_a_Level_data, a_Level):
 	gear_data["level"] = a_Level
 
 func _on_save_options_menu_load_save_data(a_New_data):
+	drop_item()
+	gear_data = DataHandler.get_gear_template()
+	
 	emit_signal("new_save_loaded", a_New_data)
 	
+	var temp_unlocks = PackedInt32Array(a_New_data["unlocks"])
+	for index in temp_unlocks:
+		grid_array[index].unlock()
+		gear_data["unlocks"].push_back(index)
+		emit_signal("incrememnt_lock_tally", 1)
+	
 	for grid in a_New_data["internals"]:
+		print("installing " + a_New_data["internals"][grid])
 		install_item(a_New_data["internals"][grid], int(grid))
 	
-	emit_signal("reset_lock_tally")
-	
-	for index in a_New_data["unlocks"]:
-		grid_array[index].unlock()
-		unlocks.push_back(current_slot.slot_ID)
-		emit_signal("incrememnt_lock_tally", 1)
+	print(gear_data)
 
 func _on_background_selector_load_background(a_Background_data):
-	gear_data["background"] = a_Background_data["background"].to_snake_case()
+	current_background = a_Background_data["background"].to_snake_case()
