@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlunoghyuk1h4"]
+[gd_scene load_steps=4 format=3 uid="uid://ct6d6kdknygnl"]
 
 [ext_resource type="Texture2D" uid="uid://butsvck7ilv1o" path="res://Assets/gridBackground.png" id="1_tq8io"]
 [ext_resource type="Script" path="res://Scripts/grid_slot.gd" id="2_q65a0"]

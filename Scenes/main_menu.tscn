@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfs7lmjjmnx3o"]
+
+[ext_resource type="Texture2D" uid="uid://borlycprd6hya" path="res://Assets/Icon.png" id="1_wypxu"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_yabap"]
+[ext_resource type="Script" path="res://Scripts/data_import_button.gd" id="2_7ypri"]
+[ext_resource type="Script" path="res://Scripts/file_dialog.gd" id="4_7cyi1"]
+
+[node name="MainMenu" type="Control"]
+custom_minimum_size = Vector2(1132, 648)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -566.0
+offset_top = -324.0
+offset_right = 566.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+offset_right = 1132.0
+offset_bottom = 648.0
+color = Color(0.0823529, 0.109804, 0.294118, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+custom_minimum_size = Vector2(400, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -300.0
+offset_right = 200.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 45.0
+offset_right = -42.0
+offset_bottom = 90.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/ColorRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_wypxu")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 40
+text = "CARP/CON"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/ColorRect"]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("1_yabap")
+
+[node name="GearBuilderButton" type="Button" parent="ColorRect/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Gear Builder
+"
+
+[node name="DataImportButton" type="Button" parent="ColorRect/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Import Data"
+script = ExtResource("2_7ypri")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(1000, 700)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+script = ExtResource("4_7cyi1")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "Error"
+initial_position = 1
+
+[connection signal="button_down" from="ColorRect/ColorRect/VBoxContainer/GearBuilderButton" to="ColorRect/ColorRect/VBoxContainer" method="_on_gear_builder_button_button_down"]
+[connection signal="button_down" from="ColorRect/ColorRect/VBoxContainer/DataImportButton" to="ColorRect/ColorRect/VBoxContainer/DataImportButton" method="_on_button_down"]
+[connection signal="file_selected" from="FileDialog" to="FileDialog" method="_on_file_selected"]

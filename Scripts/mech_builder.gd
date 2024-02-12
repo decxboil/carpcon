@@ -11,9 +11,7 @@ extends ColorRect
 @onready var containers = [chest_container, l_arm_container, r_arm_container, head_container, leg_container]
 
 @onready var stats = $"../VBoxContainer/Stats/StatsList"
-
-var save_path = "res://Data/Save Data/"
-var screenshot_path = "res://Screenshots/"
+@onready var callsign_input = $CallsignInputContainer/CallsignInput
 
 var grid_array := []
 var item_held = null
@@ -24,22 +22,27 @@ var icon_anchor : Vector2
 enum Modes {EQUIP, PLACE, UNLOCK}
 var mode = Modes.EQUIP
 
-var fisher
-
 signal item_installed(item)
 signal item_removed(item)
 
 var default_unlocks := []
 signal incrememnt_lock_tally(change)
+signal reset_lock_tally
 signal set_gear_ability(frame_data)
+signal new_save_loaded(user_data)
+
+var gear_data = DataHandler.get_gear_template()
+var internals := {}
+var current_frame := ""
+var unlocks := []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	unlocks = gear_data["unlocks"]
+	
 	for container in containers:
 		for i in container.capacity:
 			create_slot(container)
-	
-	fisher = DataHandler.create_player()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -124,6 +127,9 @@ func check_slot_availability(a_Slot):
 		if item_held.item_data["section"] != "any" and !grid_array[grid_to_check].get_parent().get_name().ends_with(item_held.item_data["section"].capitalize() + "Container"):
 			can_place = false
 			return
+		if not stats.is_under_weight_limit(item_held.item_data["weight"]):
+			can_place = false
+			return
 		can_place = true
 
 func set_lock_grids(a_Slot):
@@ -177,6 +183,7 @@ func place_item():
 		grid_array[grid_to_check].installed_item = item_held
 	
 	emit_signal("item_installed", item_held)
+	internals[current_slot.slot_ID] = item_held
 	
 	item_held = null
 	mode = Modes.EQUIP
@@ -194,6 +201,7 @@ func pickup_item():
 		var grid_to_check = item_held.grid_anchor.slot_ID + grid[0] + grid[1] * column_count
 		grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE
 		grid_array[grid_to_check].installed_item = null
+		internals.erase(grid_to_check)
 	
 	check_slot_availability(current_slot)
 	set_grids.call_deferred(current_slot)
@@ -213,23 +221,28 @@ func toggle_locked():
 	
 	if current_slot.locked:
 		current_slot.unlock()
+		unlocks.push_back(current_slot.slot_ID)
 		emit_signal("incrememnt_lock_tally", 1)
 	else:
 		if !current_slot.installed_item:
 			current_slot.lock()
+			unlocks.erase(current_slot.slot_ID)
 			emit_signal("incrememnt_lock_tally", -1)
 	
 	check_lock_availability(current_slot)
 	set_lock_grids.call_deferred(current_slot)
 
-func _on_frame_chooser_load_frame(a_Frame):
-	emit_signal("set_gear_ability", a_Frame)
-	default_unlocks = PackedInt32Array(a_Frame["default_unlocks"])
+func _on_frame_selector_load_frame(a_Frame_data, a_Frame_name):
+	emit_signal("set_gear_ability", a_Frame_data)
+	default_unlocks = PackedInt32Array(a_Frame_data["default_unlocks"])
+	current_frame = a_Frame_name
 	
 	for grid in grid_array:
 		grid.lock()
-	for index in a_Frame["default_unlocks"]:
+	for index in default_unlocks:
 		grid_array[index].unlock()
+	
+	internals_reset()
 
 func _on_unlock_toggle_button_down():
 	if item_held:
@@ -255,29 +268,72 @@ func on_item_inventory_spawn_item(a_Item_ID):
 	mode = Modes.PLACE
 
 func install_item(a_Item_ID, a_Index):
+	icon_anchor = Vector2(10000, 10000)
+	var column_count = grid_array[a_Index].get_parent().columns
 	var new_item = item_scene.instantiate()
 	grid_array[a_Index].get_parent().add_child(new_item)
-	new_item.load_item(a_Item_ID)
+	new_item.load_item(a_Item_ID.to_snake_case())
 	
 	for grid in new_item.item_grids:
-		var grid_to_check = a_Index + grid[0] + grid[1] * grid_array[a_Index].get_parent().columns
+		if grid[1] < icon_anchor.x: icon_anchor.x = grid[1]
+		if grid[0] < icon_anchor.y: icon_anchor.y = grid[0]
+		var grid_to_check = a_Index + grid[0] + grid[1] * column_count
 		grid_array[a_Index].state = grid_array[grid_to_check].States.TAKEN
 		grid_array[a_Index].installed_item = new_item
 	
-	new_item.snap_to(grid_array[a_Index].global_position)
+	var calculated_grid_id = a_Index + icon_anchor.x * column_count + icon_anchor.y
+	new_item.snap_to(grid_array[calculated_grid_id].global_position)
 	new_item.grid_anchor = grid_array[a_Index]
+	internals[a_Index] = new_item
 	emit_signal("item_installed", new_item)
 
-func _on_button_button_down():
-	var image = get_viewport().get_texture().get_image()
-	var _time = Time.get_datetime_string_from_system()
-	var filename = "user://Screenshot.png"
+func internals_reset():
+	for slot in internals:
+		for grid in internals[slot].item_grids:
+			var grid_to_check = slot + grid[0] + grid[1] * grid_array[slot].get_parent().columns
+			grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE
+			grid_array[grid_to_check].installed_item = null
+		emit_signal("item_removed", internals[slot])
+		internals[slot].queue_free()
+	internals.clear()
+
+func _on_reset_button_button_down():
+	internals_reset()
+
+func _on_save_options_menu_new_gear_pressed():
+	for grid in grid_array:
+		grid.lock()
+	for index in default_unlocks:
+		grid_array[index].unlock()
+	emit_signal("reset_lock_tally")
 	
-	image.save_png(filename)
+	internals_reset()
+
+func get_user_data_string():
+	for grid in internals.keys():
+		gear_data["internals"][str(grid)] = internals[grid].item_data["name"].to_snake_case()
 	
-	var path
-	if OS.has_feature("editor"):
-		path = ProjectSettings.globalize_path("user://")
-	else:
-		path = OS.get_executable_path().get_base_dir().path_join("user://")
-	OS.shell_show_in_file_manager(path, true)
+	gear_data["frame"] = current_frame
+	
+	gear_data["callsign"] = callsign_input.text
+	
+	return str(gear_data)
+
+func _on_level_selector_change_level(_a_Level_data, a_Level):
+	gear_data["level"] = a_Level
+
+func _on_save_options_menu_load_save_data(a_New_data):
+	emit_signal("new_save_loaded", a_New_data)
+	
+	for grid in a_New_data["internals"]:
+		install_item(a_New_data["internals"][grid], int(grid))
+	
+	emit_signal("reset_lock_tally")
+	
+	for index in a_New_data["unlocks"]:
+		grid_array[index].unlock()
+		unlocks.push_back(current_slot.slot_ID)
+		emit_signal("incrememnt_lock_tally", 1)
+
+func _on_background_selector_load_background(a_Background_data):
+	gear_data["background"] = a_Background_data["background"].to_snake_case()

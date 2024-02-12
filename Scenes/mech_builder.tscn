@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4c1rk3pk616a"]
+[gd_scene load_steps=19 format=3 uid="uid://d4c1rk3pk616a"]
 
 [ext_resource type="Script" path="res://Scripts/mech_builder.gd" id="1_e2epo"]
 [ext_resource type="Script" path="res://Scripts/tab_bar.gd" id="2_8u48r"]
@@ -9,21 +9,23 @@
 [ext_resource type="Script" path="res://Scripts/level_selector.gd" id="5_ce1ha"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/RightArmContainer.gd" id="5_ikcqh"]
 [ext_resource type="Script" path="res://Scripts/unlocks_label.gd" id="6_fn15h"]
+[ext_resource type="Script" path="res://Scripts/save_options_menu.gd" id="6_kudb4"]
 [ext_resource type="Script" path="res://Scripts/Grid Container Scripts/LegsContainer.gd" id="6_r7v1r"]
 [ext_resource type="Script" path="res://Scripts/stats_list.gd" id="9_34ety"]
 [ext_resource type="Script" path="res://Scripts/gear_ability.gd" id="9_dxgnc"]
 [ext_resource type="Script" path="res://Scripts/item_inventory.gd" id="9_xydw1"]
 [ext_resource type="Script" path="res://Scripts/background_selector.gd" id="11_enoln"]
+[ext_resource type="Script" path="res://Scripts/back_button.gd" id="13_ifahj"]
+[ext_resource type="Script" path="res://Scenes/callsign_input.gd" id="15_r861y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6m6hc"]
 
 [node name="MechLayout" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
@@ -32,6 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
@@ -79,6 +82,7 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="MechBuilder" type="ColorRect" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(1000, 800)
@@ -86,6 +90,27 @@ layout_mode = 2
 size_flags_vertical = 0
 color = Color(0.0823529, 0.109804, 0.294118, 1)
 script = ExtResource("1_e2epo")
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 136.0
+offset_top = 105.0
+offset_right = -198.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder"]
+layout_mode = 2
+offset_left = 148.0
+offset_top = 116.0
+offset_right = 791.0
+offset_bottom = 729.0
+color = Color(0.0823529, 0.109804, 0.294118, 1)
 
 [node name="MenuHeader" type="HBoxContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder"]
 custom_minimum_size = Vector2(0, 60)
@@ -135,16 +160,33 @@ custom_arrow_step = 1.0
 script = ExtResource("5_ce1ha")
 
 [node name="Control" type="Control" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
+[node name="SaveOptionsMenu" type="MenuButton" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Screenshot
-"
+text = "Save/Load"
+flat = false
+script = ExtResource("6_kudb4")
+
+[node name="FileDialog" type="FileDialog" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(800, 600)
+ok_button_text = "Open"
+file_mode = 0
+access = 1
+root_subfolder = "Saves"
+
+[node name="ResetButton" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "Reset Internals"
 
 [node name="UnlockToggle" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader"]
 custom_minimum_size = Vector2(120, 30)
@@ -179,12 +221,22 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 232.0
-offset_top = 168.0
-offset_right = -170.0
-offset_bottom = -142.0
+offset_left = 164.0
+offset_top = 147.0
+offset_right = -234.0
+offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HeadColumnLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 258.0
+offset_top = -24.0
+offset_right = 348.0
+offset_bottom = 6.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+text = "  1     2     3
+"
 
 [node name="HeadContainer" type="GridContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
 custom_minimum_size = Vector2(90, 90)
@@ -201,6 +253,25 @@ theme_override_constants/v_separation = 1
 columns = 3
 script = ExtResource("2_uci0b")
 capacity = 9
+
+[node name="HeadBottomLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 258.0
+offset_top = 92.0
+offset_right = 322.0
+offset_bottom = 115.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Head (2-3)"
+
+[node name="ChestColumnLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 2
+offset_left = 210.0
+offset_top = 116.0
+offset_right = 382.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+text = "  1     2     3      4     5     6"
 
 [node name="ChestContainer" type="GridContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
 material = SubResource("ShaderMaterial_6m6hc")
@@ -225,6 +296,25 @@ columns = 6
 script = ExtResource("3_3sunk")
 capacity = 36
 
+[node name="ChestBottomLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 326.0
+offset_right = 284.0
+offset_bottom = 349.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Chest (6-8)"
+
+[node name="LeftArmColumnLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 116.0
+offset_right = 181.0
+offset_bottom = 146.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+text = "  1     2     3      4     5     6"
+
 [node name="LeftArmContainer" type="GridContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
 custom_minimum_size = Vector2(180, 90)
 layout_mode = 1
@@ -240,6 +330,25 @@ theme_override_constants/v_separation = 1
 columns = 6
 script = ExtResource("4_msdhg")
 capacity = 18
+
+[node name="LeftArmBottomLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 234.0
+offset_right = 187.0
+offset_bottom = 257.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Left Arm (4-5)"
+
+[node name="RightArmColumnLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 116.0
+offset_right = 599.0
+offset_bottom = 146.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+text = "  1     2     3      4     5     6"
 
 [node name="RightArmContainer" type="GridContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
 custom_minimum_size = Vector2(180, 90)
@@ -260,6 +369,26 @@ columns = 6
 script = ExtResource("5_ikcqh")
 capacity = 18
 
+[node name="RightArmBottomLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 234.0
+offset_right = 494.0
+offset_bottom = 257.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Right Arm (9-10)"
+
+[node name="LegColumnLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 258.0
+offset_top = 348.0
+offset_right = 348.0
+offset_bottom = 378.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+text = "  1     2     3
+"
+
 [node name="LegContainer" type="GridContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
 custom_minimum_size = Vector2(90, 180)
 layout_mode = 1
@@ -279,6 +408,16 @@ columns = 3
 script = ExtResource("6_r7v1r")
 capacity = 18
 
+[node name="LegBottomLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
+layout_mode = 0
+offset_left = 258.0
+offset_top = 558.0
+offset_right = 332.0
+offset_bottom = 581.0
+theme_override_colors/font_color = Color(0.682353, 0.682353, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Legs (11-12)"
+
 [node name="GearAbility" type="ColorRect" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer"]
 custom_minimum_size = Vector2(190, 130)
 layout_mode = 1
@@ -287,9 +426,10 @@ anchor_left = -0.0183946
 anchor_top = 0.663571
 anchor_right = 0.0150502
 anchor_bottom = 0.749286
-offset_top = -0.149994
-offset_right = 190.0
-offset_bottom = 129.85
+offset_left = 11.0
+offset_top = 0.606659
+offset_right = 201.0
+offset_bottom = 131.121
 color = Color(0.215686, 0.215686, 0.215686, 1)
 script = ExtResource("9_dxgnc")
 metadata/_edit_use_anchors_ = true
@@ -318,6 +458,95 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 14
 autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+offset_left = 1301.0
+offset_top = 20.0
+offset_right = 1415.0
+offset_bottom = 70.0
+text = "Main Menu
+"
+script = ExtResource("13_ifahj")
+
+[node name="UnlocksOverrideToggle" type="ColorRect" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.831
+anchor_top = 0.117
+anchor_right = 0.981
+anchor_bottom = 0.167
+offset_top = 0.399994
+offset_right = -11.0001
+offset_bottom = 0.399994
+color = Color(0.215686, 0.215686, 0.215686, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="UnlocksOverrideToggle" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/UnlocksOverrideToggle"]
+layout_mode = 0
+offset_left = 11.0
+offset_right = 104.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 13
+text = "Ignore
+Hardpoint Cap"
+
+[node name="UnlocksCheckButton" type="CheckButton" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/UnlocksOverrideToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WeightCapOverrideToggle" type="ColorRect" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.831
+anchor_top = 0.18
+anchor_right = 0.981
+anchor_bottom = 0.23
+offset_right = -6.10352e-05
+grow_horizontal = 2
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="WeightCapOverrideLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/WeightCapOverrideToggle"]
+layout_mode = 0
+offset_left = 11.0
+offset_right = 104.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 13
+text = "Ignore
+Weight Cap"
+
+[node name="WeightCapCheckButton" type="CheckButton" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/WeightCapOverrideToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CallsignInputContainer" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder"]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 122.0
+offset_right = 357.0
+offset_bottom = 189.0
+
+[node name="CallsignLabel" type="Label" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/CallsignInputContainer"]
+layout_mode = 2
+text = "Callsign:"
+
+[node name="CallsignInput" type="LineEdit" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/CallsignInputContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("15_r861y")
 
 [node name="Stats Spacer" type="Control" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
@@ -385,14 +614,28 @@ color = Color(0.215686, 0.215686, 0.215686, 1)
 [connection signal="incrememnt_lock_tally" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_mech_builder_incrememnt_lock_tally"]
 [connection signal="item_installed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_mech_builder_item_installed"]
 [connection signal="item_removed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_mech_builder_item_removed"]
+[connection signal="new_save_loaded" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/FrameSelectContainer/FrameSelector" method="_on_mech_builder_new_save_loaded"]
+[connection signal="new_save_loaded" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/LevelSelectContainer/LevelSelector" method="_on_mech_builder_new_save_loaded"]
+[connection signal="new_save_loaded" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/CallsignInputContainer/CallsignInput" method="_on_mech_builder_new_save_loaded"]
+[connection signal="new_save_loaded" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/BackgroundSelector" method="_on_mech_builder_new_save_loaded"]
+[connection signal="reset_lock_tally" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_mech_builder_reset_lock_tally"]
 [connection signal="set_gear_ability" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/ContainerContainer/GearAbility" method="_on_mech_builder_set_gear_ability"]
 [connection signal="item_selected" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/FrameSelectContainer/FrameSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/FrameSelectContainer/FrameSelector" method="_on_item_selected"]
-[connection signal="load_frame" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/FrameSelectContainer/FrameSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_frame_chooser_load_frame"]
-[connection signal="load_frame" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/FrameSelectContainer/FrameSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_frame_chooser_load_frame"]
+[connection signal="load_frame" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/FrameSelectContainer/FrameSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_frame_selector_load_frame"]
+[connection signal="load_frame" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/FrameSelectContainer/FrameSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_frame_selector_load_frame"]
+[connection signal="change_level" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/LevelSelectContainer/LevelSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_level_selector_change_level"]
 [connection signal="change_level" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/LevelSelectContainer/LevelSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_level_selector_change_level"]
 [connection signal="value_changed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/LevelSelectContainer/LevelSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/LevelSelectContainer/LevelSelector" method="_on_value_changed"]
-[connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/Button" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_button_button_down"]
+[connection signal="load_save_data" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_save_options_menu_load_save_data"]
+[connection signal="new_gear_pressed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_save_options_menu_new_gear_pressed"]
+[connection signal="new_gear_pressed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/LevelSelectContainer/LevelSelector" method="_on_save_options_menu_new_gear_pressed"]
+[connection signal="new_gear_pressed" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/SaveOptionsMenu" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/CallsignInputContainer/CallsignInput" method="_on_save_options_menu_new_gear_pressed"]
+[connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/ResetButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_reset_button_button_down"]
 [connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/UnlockToggle" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_unlock_toggle_button_down"]
+[connection signal="button_down" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/BackButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/BackButton" method="_on_button_down"]
+[connection signal="toggled" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/UnlocksOverrideToggle/UnlocksCheckButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_unlocks_check_button_toggled"]
+[connection signal="toggled" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/WeightCapOverrideToggle/WeightCapCheckButton" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_weight_cap_check_button_toggled"]
 [connection signal="item_selected" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/BackgroundSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/BackgroundSelector" method="_on_item_selected"]
+[connection signal="load_background" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/BackgroundSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder" method="_on_background_selector_load_background"]
 [connection signal="load_background" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/BackgroundSelector" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" method="_on_background_selector_load_background"]
 [connection signal="update_unlock_label" from="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" to="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/MechBuilder/MenuHeader/UnlocksRemaining/UnlocksRemainingLabel" method="_on_stats_list_update_unlock_label"]

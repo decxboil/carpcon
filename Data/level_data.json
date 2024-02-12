@@ -1,68 +1,79 @@
 {
   "1": {
     "unlocks": 0,
+    "maneuvers": 0,
     "developments": 0,
     "weight_cap": 0,
     "shore_leave_stat": 0
   },
   "2": {
     "unlocks": 3,
-    "developments": 1,
-    "weight_cap": 0,
+    "maneuvers": 1,
+    "developments": 0,
+    "weight_cap": 2,
     "shore_leave_stat": 0
   },
   "3": {
     "unlocks": 6,
+    "maneuvers": 1,
     "developments": 1,
-    "weight_cap": 1,
+    "weight_cap": 2,
     "shore_leave_stat": 1
   },
   "4": {
     "unlocks": 9,
-    "developments": 2,
-    "weight_cap": 1,
+    "maneuvers": 2,
+    "developments": 1,
+    "weight_cap": 4,
     "shore_leave_stat": 1
   },
   "5": {
     "unlocks": 12,
+    "maneuvers": 2,
     "developments": 2,
-    "weight_cap": 2,
+    "weight_cap": 4,
     "shore_leave_stat": 2
   },
   "6": {
     "unlocks": 15,
-    "developments": 3,
-    "weight_cap": 2,
+    "maneuvers": 3,
+    "developments": 2,
+    "weight_cap": 6,
     "shore_leave_stat": 2
   },
   "7": {
     "unlocks": 18,
+    "maneuvers": 3,
     "developments": 3,
-    "weight_cap": 3,
+    "weight_cap": 6,
     "shore_leave_stat": 3
   },
   "8": {
     "unlocks": 21,
-    "developments": 4,
-    "weight_cap": 3,
+    "maneuvers": 4,
+    "developments": 3,
+    "weight_cap": 8,
     "shore_leave_stat": 3
   },
   "9": {
     "unlocks": 24,
+    "maneuvers": 4,
     "developments": 4,
-    "weight_cap": 4,
+    "weight_cap": 8,
     "shore_leave_stat": 4
   },
   "10": {
     "unlocks": 27,
-    "developments": 5,
-    "weight_cap": 4,
+    "maneuvers": 4,
+    "developments": 4,
+    "weight_cap": 10,
     "shore_leave_stat": 4
   },
   "11": {
     "unlocks": 27,
-    "developments": 5,
-    "weight_cap": 4,
+    "maneuvers": 4,
+    "developments": 4,
+    "weight_cap": 10,
     "shore_leave_stat": 4
   }
 }

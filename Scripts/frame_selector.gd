@@ -1,9 +1,9 @@
 extends OptionButton
 
-var save_path = "res://Data/frame_data.fsh"
+var save_path = "user://LocalData/frame_data.json"
 
 var frame_data = {}
-signal load_frame(frame)
+signal load_frame(frame_data, frame_name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,8 +17,12 @@ func _ready():
 	for frame in frame_data:
 		add_item(frame.capitalize())
 	
-	emit_signal.call_deferred("load_frame", frame_data[frame_data.keys()[0]])
+	emit_signal.call_deferred("load_frame", frame_data[frame_data.keys()[0]], frame_data.keys()[0])
 
 func _on_item_selected(index):
 	var frame_name = get_item_text(index).to_snake_case()
-	emit_signal("load_frame", frame_data[frame_name])
+	emit_signal("load_frame", frame_data[frame_name], frame_name)
+
+func _on_mech_builder_new_save_loaded(a_User_data):
+	select(frame_data.keys().find(a_User_data["frame"]))
+	emit_signal("load_frame", frame_data[a_User_data["frame"]], a_User_data["frame"])

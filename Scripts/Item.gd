@@ -13,7 +13,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if selected:
-		global_position = lerp(global_position, get_global_mouse_position(), 60 * delta)
+		global_position = lerp(global_position, get_global_mouse_position() - Vector2(icon.texture.get_width()/2, icon.texture.get_height()/2 + 10), 60 * delta)
 
 func load_item(a_itemID : String):
 	global_position = get_global_mouse_position()

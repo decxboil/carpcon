@@ -9,7 +9,7 @@ extends VBoxContainer
 
 var section_list := {"head": null, "chest": null, "arm": null, "leg": null}
 
-var types = ["weapon", "active", "passive", "mitigation"]
+var types = ["ranged", "melee", "active", "passive", "mitigation"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,11 +22,11 @@ func _ready():
 		section_list[part] = new_grid
 		new_scroll.visible = false
 	
-	var item_array := []	
+	var item_array := []
 	for item in DataHandler.item_data:
 		item_array.append(DataHandler.item_data[item])
 	
-	item_array.sort_custom(func(a, b): return types.find(a["type"]) < types.find(b["type"]))
+	item_array.sort_custom(func(a, b): return types.find(a["type"]) < types.find(b["type"]) if types.find(a["type"]) != types.find(b["type"]) else a["name"] < b["name"])
 	
 	for item in item_array:
 		if item["section"] == "any":

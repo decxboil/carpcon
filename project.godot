@@ -11,23 +11,33 @@ config_version=5
 [application]
 
 config/name="Carp/Con"
-run/main_scene="res://Scenes/mech_builder.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/Icon.png"
+config/windows_native_icon="res://Assets/icon.ico"
 
 [autoload]
 
+LocalDataHandler="*res://Scripts/LocalDataHandler.gd"
 DataHandler="*res://Scripts/DataHandler.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+window/name="Carp/Con"
 
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
 
 [input]
 

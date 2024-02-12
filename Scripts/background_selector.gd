@@ -1,8 +1,8 @@
 extends OptionButton
 
-var save_path = "res://Data/fisher_backgrounds.json"
+var save_path = "user://LocalData/fisher_backgrounds.json"
 
-var background_data = {}
+var background_data := {}
 signal load_background(background_data)
 
 # Called when the node enters the scene tree for the first time.
@@ -22,3 +22,7 @@ func _ready():
 func _on_item_selected(index):
 	var background_name = get_item_text(index).to_snake_case()
 	emit_signal("load_background", background_data[background_name])
+
+func _on_mech_builder_new_save_loaded(a_User_data):
+	select(background_data.keys().find(a_User_data["background"]))
+	emit_signal("load_background", background_data[a_User_data["background"]])
