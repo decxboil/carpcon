@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfs7lmjjmnx3o"]
 
 [ext_resource type="Texture2D" uid="uid://borlycprd6hya" path="res://Assets/Icon.png" id="1_wypxu"]
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_yabap"]
+[ext_resource type="Script" path="res://Scenes/gear_builder_button.gd" id="2_3fw3y"]
 [ext_resource type="Script" path="res://Scripts/data_import_button.gd" id="2_7ypri"]
 [ext_resource type="PackedScene" uid="uid://dkiv4ctslv22q" path="res://Scenes/file_import_dialog.tscn" id="4_io7sg"]
 
@@ -80,7 +80,6 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
-script = ExtResource("1_yabap")
 
 [node name="GearBuilderButton" type="Button" parent="ColorRect/ColorRect/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
@@ -89,6 +88,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Gear Builder
 "
+script = ExtResource("2_3fw3y")
 
 [node name="DataImportButton" type="Button" parent="ColorRect/ColorRect/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
@@ -100,5 +100,5 @@ script = ExtResource("2_7ypri")
 
 [node name="FileDialog" parent="." instance=ExtResource("4_io7sg")]
 
-[connection signal="button_down" from="ColorRect/ColorRect/VBoxContainer/GearBuilderButton" to="ColorRect/ColorRect/VBoxContainer" method="_on_gear_builder_button_button_down"]
+[connection signal="button_down" from="ColorRect/ColorRect/VBoxContainer/GearBuilderButton" to="ColorRect/ColorRect/VBoxContainer/GearBuilderButton" method="_on_button_down"]
 [connection signal="button_down" from="ColorRect/ColorRect/VBoxContainer/DataImportButton" to="ColorRect/ColorRect/VBoxContainer/DataImportButton" method="_on_button_down"]
