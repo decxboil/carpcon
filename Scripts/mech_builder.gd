@@ -185,6 +185,7 @@ func place_item():
 	
 	item_held = null
 	mode = Modes.EQUIP
+	stats.update_weight_label_effect(null)
 	clear_grid()
 
 func pickup_item():
@@ -194,6 +195,7 @@ func pickup_item():
 	var column_count = current_slot.get_parent().columns
 	item_held = current_slot.installed_item
 	item_held.selected = true
+	stats.update_weight_label_effect(item_held.item_data["weight"])
 	
 	for grid in item_held.item_grids:
 		var grid_to_check = item_held.grid_anchor.slot_ID + grid[0] + grid[1] * column_count
@@ -214,6 +216,7 @@ func drop_item():
 	item_held.queue_free()
 	item_held = null
 	mode = Modes.EQUIP
+	stats.update_weight_label_effect(null)
 
 func toggle_locked():
 	if not current_slot or not can_lock:
@@ -266,6 +269,7 @@ func on_item_inventory_spawn_item(a_Item_ID):
 	new_item.selected = true
 	item_held = new_item
 	mode = Modes.PLACE
+	stats.update_weight_label_effect(item_held.item_data["weight"])
 
 func install_item(a_Item_ID, a_Index):
 	icon_anchor = Vector2(10000, 10000)

@@ -56,6 +56,8 @@ var current_level
 var ignoring_weight_cap = false
 var ignoring_unlock_cap = false
 
+@onready var weight_label_shaker = $WeightLabelShaker
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for key in stats_to_display.keys():
@@ -66,6 +68,8 @@ func _ready():
 		if spacer_locations.has(key):
 			var blank_label = stat_label_scene.instantiate()
 			add_child(blank_label)
+	
+	weight_label_shaker.target_label = label_dict["weight"] # magic constants, yippee
 
 func update_labels():
 	stats_to_display["ballast"] = int(base_stats["ballast"] + cringe_ballast_tracker + stats_to_display["weight"]/5)
@@ -153,6 +157,12 @@ func _on_mech_builder_reset_lock_tally():
 func is_under_weight_limit(a_Item_weight):
 	var under_limit = a_Item_weight + stats_to_display["weight"] <= stats_to_display["weight_cap"]
 	return under_limit or ignoring_weight_cap
+
+func update_weight_label_effect(a_Item_weight):
+	if (a_Item_weight == null) or is_under_weight_limit(a_Item_weight):
+		weight_label_shaker.stop_shaking()
+	else:
+		weight_label_shaker.start_shaking()
 
 func _on_weight_cap_check_button_toggled(button_pressed):
 	ignoring_weight_cap = button_pressed

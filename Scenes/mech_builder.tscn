@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d4c1rk3pk616a"]
+[gd_scene load_steps=20 format=3 uid="uid://d4c1rk3pk616a"]
 
 [ext_resource type="Script" path="res://Scripts/mech_builder.gd" id="1_e2epo"]
 [ext_resource type="Script" path="res://Scripts/tab_bar.gd" id="2_8u48r"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/background_selector.gd" id="11_enoln"]
 [ext_resource type="Script" path="res://Scripts/back_button.gd" id="13_ifahj"]
 [ext_resource type="Script" path="res://Scripts/callsign_input.gd" id="15_aojyd"]
+[ext_resource type="PackedScene" uid="uid://cfwgb2kcqpgc1" path="res://Scenes/label_shaker.tscn" id="18_bshw1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6m6hc"]
 
@@ -597,6 +598,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 script = ExtResource("9_34ety")
+
+[node name="WeightLabelShaker" parent="ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Stats/StatsList" instance=ExtResource("18_bshw1")]
 
 [node name="Bottom Spacer" type="Control" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
