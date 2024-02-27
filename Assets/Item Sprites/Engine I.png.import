@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bljk7uqtt4t0m"
-path="res://.godot/imported/Reactor I.png-0ed263c5403406a603108c653b318e8a.ctex"
+uid="uid://cvjq0wewr3p6q"
+path="res://.godot/imported/Engine I.png-4177711b211f12e7eb8c79350c6d0a49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Reactor I.png"
-dest_files=["res://.godot/imported/Reactor I.png-0ed263c5403406a603108c653b318e8a.ctex"]
+source_file="res://Assets/Item Sprites/Engine I.png"
+dest_files=["res://.godot/imported/Engine I.png-4177711b211f12e7eb8c79350c6d0a49.ctex"]
 
 [params]
 

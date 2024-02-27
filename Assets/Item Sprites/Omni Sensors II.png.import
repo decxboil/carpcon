@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h1m2i4dpx0am"
-path="res://.godot/imported/Fragile Reactor.png-6ebf69f2fb2b17f6fbd7d9484199a42e.ctex"
+uid="uid://cku60uyvpshbx"
+path="res://.godot/imported/Omni Sensors II.png-68b19cee1b49373d4e8f05a539bbb01b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Fragile Reactor.png"
-dest_files=["res://.godot/imported/Fragile Reactor.png-6ebf69f2fb2b17f6fbd7d9484199a42e.ctex"]
+source_file="res://Assets/Item Sprites/Omni Sensors II.png"
+dest_files=["res://.godot/imported/Omni Sensors II.png-68b19cee1b49373d4e8f05a539bbb01b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7fdp2m1bw6jk"
-path="res://.godot/imported/Sturdy Reactor.png-823f7d8668a5cf497bb674891efaf031.ctex"
+uid="uid://bbxkeu58rw2vk"
+path="res://.godot/imported/Omni Sensors I.png-3738bda869111df1e9c7217350dba6f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Sturdy Reactor.png"
-dest_files=["res://.godot/imported/Sturdy Reactor.png-823f7d8668a5cf497bb674891efaf031.ctex"]
+source_file="res://Assets/Item Sprites/Omni Sensors I.png"
+dest_files=["res://.godot/imported/Omni Sensors I.png-3738bda869111df1e9c7217350dba6f9.ctex"]
 
 [params]
 

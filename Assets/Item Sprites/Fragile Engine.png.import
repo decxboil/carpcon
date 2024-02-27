@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7fdp2m1bw6jk"
-path="res://.godot/imported/Sturdy Reactor.png-823f7d8668a5cf497bb674891efaf031.ctex"
+uid="uid://cve3y3oa2liee"
+path="res://.godot/imported/Fragile Engine.png-243db9c2af3e9e65badfb5bce3e88594.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Item Sprites/Sturdy Reactor.png"
-dest_files=["res://.godot/imported/Sturdy Reactor.png-823f7d8668a5cf497bb674891efaf031.ctex"]
+source_file="res://Assets/Item Sprites/Fragile Engine.png"
+dest_files=["res://.godot/imported/Fragile Engine.png-243db9c2af3e9e65badfb5bce3e88594.ctex"]
 
 [params]
 

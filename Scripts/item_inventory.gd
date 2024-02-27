@@ -32,11 +32,11 @@ func _ready():
 			for section in section_list:
 				var new_entry = menu_item_scene.instantiate()
 				section_list[section].add_child(new_entry)
-				new_entry.load_item(item)
+				new_entry.load_item(item, DataHandler.item_data.find_key(item))
 		else:
 			var new_entry = menu_item_scene.instantiate()
 			section_list[item["section"]].add_child(new_entry)
-			new_entry.load_item(item)
+			new_entry.load_item(item, DataHandler.item_data.find_key(item))
 
 func _on_tab_bar_tab_chosen(label):
 	change_visibility.call_deferred(label)
